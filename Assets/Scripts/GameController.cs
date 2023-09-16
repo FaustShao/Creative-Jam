@@ -21,17 +21,17 @@ public class GameController : MonoBehaviour
     //TOD: Replace GameObject Class with actual class
     [Header("GameObjects")]
 
-    public GameObject CurrentActivePlayer;
-    public List<GameObject> Player_Lives;
+    public PlayerController CurrentActivePlayer;
+    public List<PlayerController> Player_Lives;
 
     public GoalDevice Goal;
     public List<GameObject> Walls;
 
     public List<GameObject> Turrets;
 
-    public GameObject Door;
+    public UnlockableBarrier Door;
 
-    public GameObject DoorTrigger;
+    public Locks DoorTrigger;
 
 
     void Start()
@@ -54,7 +54,7 @@ public class GameController : MonoBehaviour
 
 
         remainingActionCount--;
-
+        //Player.playsetp(maxActionCount - remainingActionCount);
 
     }
 
