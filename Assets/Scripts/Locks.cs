@@ -21,13 +21,7 @@ public class Locks : MonoBehaviour
 
     TODO: Add Actual detection for Unlock
     */
-    void checkUnlock(){
-        if(true){
-            isUnlocked = true;
-        }else{
-            isUnlocked = false;
-        }
-    }
+    
 
     private void OnTriggerEnter2D(Collider2D other) {
         isUnlocked = true;
