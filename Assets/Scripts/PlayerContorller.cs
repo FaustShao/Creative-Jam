@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 1f;
+
+    public GameController CurrentGame;
     public float gridSize = 1f; // Set this to your grid size
     private Vector3 targetPosition;
     private bool isMoving;
@@ -15,6 +17,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+
         targetPosition = transform.position;
     }
 
@@ -76,5 +79,12 @@ public class PlayerController : MonoBehaviour
             isMoving = false;
             animator.SetBool("isMoving",false);
         }
+    }
+
+
+
+
+    public void PlayStep(int i){
+        Debug.Log("TODO: Play actoin step");
     }
 }

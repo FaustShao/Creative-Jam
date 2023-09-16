@@ -21,7 +21,19 @@ public class UnlockableBarrier : MonoBehaviour
     {
         bool check = true;
         foreach (Locks l in controlLocks){
-            
+            if(!l.isUnlocked) {
+                check = false;
+                break;
+            }
         }
+        Unlocked = check;
+    }
+
+    public void SoftReset(){
+        foreach (Locks l in controlLocks){
+            l.SoftReset();
+        }
+
+        Unlocked = false;
     }
 }

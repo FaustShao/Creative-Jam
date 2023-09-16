@@ -51,11 +51,10 @@ public class GameController : MonoBehaviour
     }
 
     public void ProceedGame(){
-
-
         remainingActionCount--;
-        //Player.playsetp(maxActionCount - remainingActionCount);
-
+        foreach (PlayerController p in Player_Lives){
+            p.PlayStep(maxActionCount - remainingActionCount);
+        }
     }
 
     public void FailGame(){

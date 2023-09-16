@@ -15,7 +15,6 @@ public class Locks : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        checkUnlock();
     }
 
     /*
@@ -28,5 +27,24 @@ public class Locks : MonoBehaviour
         }else{
             isUnlocked = false;
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        isUnlocked = true;
+
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        isUnlocked = false;   
+    }
+
+
+    public void ForceDisable(){
+        isUnlocked = false;
+    }
+
+    public void SoftReset(){
+        ForceDisable();
     }
 }
