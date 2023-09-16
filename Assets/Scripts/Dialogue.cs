@@ -14,7 +14,7 @@ public class Dialogue : MonoBehaviour
     public Sprite[] icons;
     public float textspeed;
 
-
+    private PlayerController triggeredPlayer;
     public KeyCode SkipKey;
     private int index;
     // Start is called before the first frame update
@@ -40,9 +40,9 @@ public class Dialogue : MonoBehaviour
         }
     }
 
-    void StartDialog(){
+    void StartDialog(PlayerController player ){
         index = 0;
-
+        triggeredPlayer = player;
         StartCoroutine(TypeLine());
 
     }
@@ -79,17 +79,19 @@ public class Dialogue : MonoBehaviour
         }
     }
     
-    public void ActivateDialogue(){
+    public void ActivateDialogue(PlayerController player){
         isInDialogue = true;
         textComponent.text = string.Empty;
         gameObject.SetActive(true);
-        StartDialog();
+        StartDialog(player);
     }
 
     public void DeactivateDialogue(){
         textComponent.text = string.Empty;
         gameObject.SetActive(false);
         isInDialogue = false;
+        triggeredPlayer.isInDialogue = false;
+        triggeredPlayer = null;
     }
     public void SetDialogue(string[] str, Sprite[] sprites){
         lines = str;

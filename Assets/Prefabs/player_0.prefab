@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 457277110002872882}
   m_Layer: 0
   m_Name: player_0
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,8 +112,8 @@ Rigidbody2D:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!61 &1362541811881078199
 BoxCollider2D:
@@ -174,7 +174,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 1
   gridSize: 1
+  isInDialogue: 0
+  playerGeneration: 0
   animator: {fileID: 457277110002872882}
+  playerActionsList: []
+  gameController: {fileID: 0}
+  exhausted: 0
 --- !u!95 &457277110002872882
 Animator:
   serializedVersion: 5

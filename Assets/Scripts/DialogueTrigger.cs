@@ -41,18 +41,18 @@ public class DialogueTrigger : MonoBehaviour
     {   
         
         PlayerController Player = other.gameObject.GetComponent<PlayerController>();
+        //
         Debug.Log(other.gameObject.CompareTag("Player"));
-
         Player.isInDialogue = dialogue.isInDialogue;
         if(Input.GetKeyDown(InteractionKeyBind) && !dialogue.isInDialogue){
-
+            
             if(index <= dialogues.Length - 1){
                 dialogue.SetDialogue(dialogues[index].dialogue,icons[index].icon);
-                dialogue.ActivateDialogue();
+                dialogue.ActivateDialogue(Player);
                 index++;
             }else{
                 dialogue.SetDialogue(dialogues[RepeatingIndex].dialogue,icons[RepeatingIndex].icon);
-                dialogue.ActivateDialogue();
+                dialogue.ActivateDialogue(Player);
             }
 
         }
