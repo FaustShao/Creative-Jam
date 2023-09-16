@@ -57,4 +57,21 @@ public class DialogueTrigger : MonoBehaviour
 
         }
     }
+
+    public void ForceTrigger(){
+
+        Time.timeScale = 0;
+        dialogue.DeactivateDialogue();
+        PlayerController Player = null;
+        if(index <= dialogues.Length - 1){
+            dialogue.SetDialogue(dialogues[index].dialogue,icons[index].icon);
+            dialogue.ActivateDialogue(Player);
+            index++;
+        }else{
+            dialogue.SetDialogue(dialogues[RepeatingIndex].dialogue,icons[RepeatingIndex].icon);
+            dialogue.ActivateDialogue(Player);
+        }        
+            
+
+    }
 }

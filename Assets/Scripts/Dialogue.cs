@@ -90,8 +90,14 @@ public class Dialogue : MonoBehaviour
         textComponent.text = string.Empty;
         gameObject.SetActive(false);
         isInDialogue = false;
-        triggeredPlayer.isInDialogue = false;
-        triggeredPlayer = null;
+
+        if(triggeredPlayer != null){
+            triggeredPlayer.isInDialogue = false;
+            triggeredPlayer = null;
+        }
+
+        Time.timeScale = 1;
+        
     }
     public void SetDialogue(string[] str, Sprite[] sprites){
         lines = str;
