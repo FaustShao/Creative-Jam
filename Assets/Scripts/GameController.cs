@@ -5,47 +5,45 @@ using  UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    // Start is called before the first frame update
-
-
     [Header("SceneKeyAttributes")]
-    public int maxActionCount;
-
+    
     public int remainingActionCount;
-    public int maxRewindCount;
-
+    public int playerGenerationCounter = 0;
     public int remainingRewindCount;
-    public Vector2 spawnPoint;
     public bool isSolved;
+    public Level level1;
 
     //TOD: Replace GameObject Class with actual class
     [Header("GameObjects")]
 
     public GameObject CurrentActivePlayer;
     public List<GameObject> Player_Lives;
-
     public GoalDevice Goal;
     public List<GameObject> Walls;
-
     public List<GameObject> Turrets;
-
     public UnlockableBarrier Door;
-
     public Locks DoorTrigger;
 
     [Header("Prefabs")]
     public GameObject playerPrefab;
+    public GameObject level1Object;
+
+    void Awake()
+    {
+      DontDestroyOnLoad(gameObject);
+    }
 
 
     void Start()
     {
       // Set the initial game state
       isSolved = false;
-      remainingActionCount = maxActionCount;
-      remainingRewindCount = maxRewindCount;
+      level1 = level1Object.GetComponent<Level>();
+      remainingActionCount = level1.maxActionCount;
+      remainingRewindCount = level1.maxRewindCount;
 
       // Instantiate the first player at the spawn point and set it as the current active player
-      GameObject newPlayer = Instantiate(playerPrefab, new Vector3(spawnPoint.x, spawnPoint.y, 0), Quaternion.identity);
+      GameObject newPlayer = Instantiate(playerPrefab, new Vector3(level1.spawnPoint.x, level1.spawnPoint.y, 0), Quaternion.identity);
       CurrentActivePlayer = newPlayer;
       Player_Lives.Add(newPlayer);
 
@@ -56,17 +54,26 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+      HandleExhaustedPlayer();
         //if(Goal.isActivated){
-            //WinGame();
+        //WinGame();
         //}
     }
 
-    public void ProceedGame(){
-        //remainingActionCount--;
-        //foreach (PlayerController p in Player_Lives){
-            //p.PlayStep(maxActionCount - remainingActionCount);
-        //}
+    public void ProceedGame()
+    {
+      remainingActionCount--;
+
+      foreach (GameObject player in Player_Lives)
+      {
+        // Move each player according to their recorded action
+        if (player.GetComponent<PlayerController>().playerGeneration < playerGenerationCounter)
+        {
+          player.GetComponent<PlayerController>().PlayStep(level1.maxActionCount - remainingActionCount);
+        }
+      }
     }
+
 
     public void FailGame(){
         //TODO: add Game Fail ;
@@ -74,8 +81,6 @@ public class GameController : MonoBehaviour
         //reload Current Scene;
         Scene scene = SceneManager.GetActiveScene(); 
         SceneManager.LoadScene(scene.name);
-
-
     }
 
      public void WinGame(){
@@ -83,6 +88,29 @@ public class GameController : MonoBehaviour
 
         Debug.Log("TODO: Activate Win Game Effect");
 
+     }
 
+
+    public void HandleExhaustedPlayer()
+    {
+      if (CurrentActivePlayer.GetComponent<PlayerController>().exhausted)
+      {
+        // Naming the exhausted player and incrementing the generation counter
+        CurrentActivePlayer.gameObject.name = "PlayerLife" + playerGenerationCounter;
+        playerGenerationCounter++;
+
+        // Instantiating the new player
+        GameObject newPlayer = Instantiate(CurrentActivePlayer, new Vector3(level1.spawnPoint.x, level1.spawnPoint.y, 0), Quaternion.identity);
+        PlayerController newPlayerController = newPlayer.GetComponent<PlayerController>();
+        newPlayerController.playerGeneration = playerGenerationCounter;
+        newPlayerController.gameController = this; // Linking the GameController
+        newPlayerController.exhausted = false;
+        Player_Lives.Add(newPlayer);
+        // Setting the new player as the active player
+        CurrentActivePlayer = newPlayer;
+        CurrentActivePlayer.GetComponent<PlayerController>().exhausted = false;
+
+        // Setting the exhausted flag to false for the new player
+      }
     }
 }
