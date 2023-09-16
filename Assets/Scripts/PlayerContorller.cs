@@ -13,21 +13,25 @@ public class PlayerController : MonoBehaviour
   public int playerGeneration = 0;
   public Animator animator;
   public List<string> playerActionsList;
-
+  public bool isInReplay = false;
+  private Vector3 respawnPoint;
   public GameController gameController; // Reference to the GameController script
 
   private bool isKicking = false;
   public bool exhausted = false;
-  private int remain = 6; //TO DO: change this to actual remainingPlayerActions
- 
+  public int remain;
   void Start()
   {
     targetPosition = transform.position;
+    playerActionsList = new List<string>();
+    respawnPoint = transform.position;
+    remain = gameController.maxActionCount;
+    Debug.Log("remain is:"+remain);
   }
 
   void FixedUpdate()
   {
-    if (isMoving || exhausted || isInDialogue)
+    if (isMoving || exhausted || isInDialogue || isInReplay)
       return;
 
     float h = Input.GetAxisRaw("Horizontal");
@@ -61,12 +65,13 @@ public class PlayerController : MonoBehaviour
       }
       isBlockedByWall = false;
       Move(new Vector3(h, v, 0));
+      gameController.ProceedGame();
     }
   }
 
   void Move(Vector3 direction)
   {
-    if ((isMoving || isKicking) || exhausted || isInDialogue)
+    if ((isMoving || isKicking) || (exhausted && !isInReplay) || isInDialogue || isInReplay)
       return;
 
     if (!isMoving && !isKicking)
@@ -96,7 +101,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("isMoving", true);
         remain -= 1;
       }
-      if(!isBlockedByWall){
+      if(!isBlockedByWall && playerActionsList.Count < gameController.maxActionCount){
         if (direction == Vector3.up)
         {
           playerActionsList.Add("w");
@@ -145,6 +150,7 @@ public class PlayerController : MonoBehaviour
     // Update exhausted state based on remainingActionCount from GameController
     //exhausted = gameController.remainingActionCount <= 0;
     exhausted = remain <= 0;
+    Debug.Log(remain);
     //Debug.Log(gameController.remainingActionCount);
     animator.SetBool("isExhausted", exhausted);
   }
@@ -157,14 +163,29 @@ public class PlayerController : MonoBehaviour
 
   public void PlayStep(int stepIndex)
   {
+    isInReplay = true;
+    animator.SetBool("isReplayed", true);
+    //ResetToRespawnPoint();
+
     if (stepIndex < playerActionsList.Count)
     {
       string action = playerActionsList[stepIndex];
 
       // Convert the action string to a direction and move the player
       Vector3 direction = ActionToDirection(action);
+      isInReplay = false;
       Move(direction);
+      isInReplay = true;
     }
+  }
+
+  public void ResetToRespawnPoint()
+  {
+    transform.position = respawnPoint;  // Set position to respawn point
+    animator.SetBool("isReplaying", false);  // Reset replaying flag
+    animator.SetBool("isMoving", false);  // Reset other animator flags
+    animator.SetBool("isKicking", false);  // Reset other animator flags
+    isInReplay = false;  // Reset replay flag
   }
 
   private Vector3 ActionToDirection(string action)

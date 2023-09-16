@@ -33,17 +33,14 @@ public class GameController : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject level1Object;
 
-    void Awake()
-    {
-      DontDestroyOnLoad(gameObject);
-    }
-
-
     void Start()
     {
+      maxActionCount = 6;
+      maxRewindCount = 2;
       // Set the initial game state
       isSolved = false;
-
+      remainingActionCount = maxActionCount;
+      remainingRewindCount = maxRewindCount;
       // Instantiate the first player at the spawn point and set it as the current active player
       GameObject newPlayer = Instantiate(playerPrefab, new Vector3(spawnPoint.x, spawnPoint.y, 0), Quaternion.identity);
       CurrentActivePlayer = newPlayer;
@@ -62,10 +59,15 @@ public class GameController : MonoBehaviour
 
     public void ProceedGame()
     {
-      remainingActionCount--;
+      remainingActionCount = CurrentActivePlayer.GetComponent<PlayerController>().remain;
+      Debug.Log("remainActionCount" + remainingActionCount);
 
       foreach (GameObject player in Player_Lives)
       {
+        if(player.GetComponent<PlayerController>().remain == maxActionCount)
+        {
+          player.GetComponent<PlayerController>().ResetToRespawnPoint();
+        }
         // Move each player according to their recorded action
         if (player.GetComponent<PlayerController>().playerGeneration < playerGenerationCounter)
         {
@@ -93,12 +95,15 @@ public class GameController : MonoBehaviour
 
     public void HandleExhaustedPlayer()
     {
-      if (CurrentActivePlayer.GetComponent<PlayerController>().exhausted)
+      if (CurrentActivePlayer.GetComponent<PlayerController>().exhausted && Input.anyKeyDown)
       {
+        remainingRewindCount--;
         // Naming the exhausted player and incrementing the generation counter
         CurrentActivePlayer.gameObject.name = "PlayerLife" + playerGenerationCounter;
+        CurrentActivePlayer.GetComponent<PlayerController>().remain = maxActionCount;
+        CurrentActivePlayer.GetComponent<PlayerController>().exhausted = false;
+        CurrentActivePlayer.transform.position = spawnPoint;
         playerGenerationCounter++;
-
         // Instantiating the new player
         GameObject newPlayer = Instantiate(CurrentActivePlayer, new Vector3(spawnPoint.x, spawnPoint.y, 0), Quaternion.identity);
         PlayerController newPlayerController = newPlayer.GetComponent<PlayerController>();
