@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Dialogue : MonoBehaviour
 {
-
+    
     public TextMeshProUGUI textComponent;
     public Image imageComponent;
     public string[] lines;  

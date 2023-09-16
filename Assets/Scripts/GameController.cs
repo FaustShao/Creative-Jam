@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour
 {
     [Header("SceneKeyAttributes")]
     public int maxActionCount;
+    public string nextScene;
     public int maxRewindCount;
     public string sceneName;
     public Vector2 spawnPoint;
@@ -14,6 +15,8 @@ public class GameController : MonoBehaviour
     public int playerGenerationCounter = 0;
     public int remainingRewindCount;
     public bool isSolved;
+
+    public MenuController Menu;
 
     //TOD: Replace GameObject Class with actual class
     [Header("GameObjects")]
@@ -54,9 +57,7 @@ public class GameController : MonoBehaviour
     void Update()
     {
       HandleExhaustedPlayer();
-        //if(Goal.isActivated){
-        //WinGame();
-        //}
+      CheckPause();
     }
 
     public void ProceedGame()
@@ -111,5 +112,13 @@ public class GameController : MonoBehaviour
 
         // Setting the exhausted flag to false for the new player
       }
+    }
+
+    void CheckPause(){
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            Menu.isActiveOnStart = true;
+            Menu.gameObject.SetActive(true);
+            Time.timeScale = 0;
+        }
     }
 }
