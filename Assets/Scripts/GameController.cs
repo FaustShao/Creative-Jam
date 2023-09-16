@@ -6,12 +6,14 @@ using  UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     [Header("SceneKeyAttributes")]
-    
+    public int maxActionCount;
+    public int maxRewindCount;
+    public string sceneName;
+    public Vector2 spawnPoint;
     public int remainingActionCount;
     public int playerGenerationCounter = 0;
     public int remainingRewindCount;
     public bool isSolved;
-    public Level level1;
 
     //TOD: Replace GameObject Class with actual class
     [Header("GameObjects")]
@@ -38,12 +40,9 @@ public class GameController : MonoBehaviour
     {
       // Set the initial game state
       isSolved = false;
-      level1 = level1Object.GetComponent<Level>();
-      remainingActionCount = level1.maxActionCount;
-      remainingRewindCount = level1.maxRewindCount;
 
       // Instantiate the first player at the spawn point and set it as the current active player
-      GameObject newPlayer = Instantiate(playerPrefab, new Vector3(level1.spawnPoint.x, level1.spawnPoint.y, 0), Quaternion.identity);
+      GameObject newPlayer = Instantiate(playerPrefab, new Vector3(spawnPoint.x, spawnPoint.y, 0), Quaternion.identity);
       CurrentActivePlayer = newPlayer;
       Player_Lives.Add(newPlayer);
 
@@ -69,7 +68,7 @@ public class GameController : MonoBehaviour
         // Move each player according to their recorded action
         if (player.GetComponent<PlayerController>().playerGeneration < playerGenerationCounter)
         {
-          player.GetComponent<PlayerController>().PlayStep(level1.maxActionCount - remainingActionCount);
+          player.GetComponent<PlayerController>().PlayStep(maxActionCount - remainingActionCount);
         }
       }
     }
@@ -100,7 +99,7 @@ public class GameController : MonoBehaviour
         playerGenerationCounter++;
 
         // Instantiating the new player
-        GameObject newPlayer = Instantiate(CurrentActivePlayer, new Vector3(level1.spawnPoint.x, level1.spawnPoint.y, 0), Quaternion.identity);
+        GameObject newPlayer = Instantiate(CurrentActivePlayer, new Vector3(spawnPoint.x, spawnPoint.y, 0), Quaternion.identity);
         PlayerController newPlayerController = newPlayer.GetComponent<PlayerController>();
         newPlayerController.playerGeneration = playerGenerationCounter;
         newPlayerController.gameController = this; // Linking the GameController
