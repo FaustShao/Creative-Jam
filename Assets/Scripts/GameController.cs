@@ -21,47 +21,57 @@ public class GameController : MonoBehaviour
     //TOD: Replace GameObject Class with actual class
     [Header("GameObjects")]
 
-    public GameObject CurrentActivePlayer;
-    public List<GameObject> Player_Lives;
+    public PlayerController CurrentActivePlayer;
+    public List<PlayerController> Player_Live;
     public GoalDevice Goal;
     public List<GameObject> Walls;
     public List<GameObject> Turrets;
     public UnlockableBarrier Door;
     public Locks DoorTrigger;
 
-    [Header("Prefabs")]
-    public GameObject playerPrefab;
-    public GameObject level1Object;
+    //[Header("Prefabs")]
+    //public GameObject playerPrefab;
+    //public GameObject level1Object;
 
     void Start()
     {
-      maxActionCount = 6;
-      maxRewindCount = 2;
+      //maxActionCount = 6;
+      //maxRewindCount = 2;
       // Set the initial game state
       isSolved = false;
       remainingActionCount = maxActionCount;
       remainingRewindCount = maxRewindCount;
       // Instantiate the first player at the spawn point and set it as the current active player
-      GameObject newPlayer = Instantiate(playerPrefab, new Vector3(spawnPoint.x, spawnPoint.y, 0), Quaternion.identity);
-      CurrentActivePlayer = newPlayer;
-      Player_Lives.Add(newPlayer);
+      //GameObject newPlayer = Instantiate(playerPrefab, new Vector3(spawnPoint.x, spawnPoint.y, 0), Quaternion.identity);
+      //CurrentActivePlayer = newPlayer;
+      //Player_Lives.Add(newPlayer);
+
+      CurrentActivePlayer = Player_Live[maxRewindCount - remainingRewindCount];
+
+      Debug.Log( Player_Live[0]);
 
       // Link the new player to this game controller
-      newPlayer.GetComponent<PlayerController>().gameController = this;
+      //newPlayer.GetComponent<PlayerController>().gameController = this;
     }
 
     // Update is called once per frame
     void Update()
     {
-      HandleExhaustedPlayer();
+      //HandleExhaustedPlayer();
       CheckPause();
     }
 
     public void ProceedGame()
     {
-      remainingActionCount = CurrentActivePlayer.GetComponent<PlayerController>().remain;
+      //remainingActionCount = CurrentActivePlayer.GetComponent<PlayerController>().remain;
       Debug.Log("remainActionCount" + remainingActionCount);
+      ReplayAllAvailable();
+      remainingActionCount--;
 
+      CheckEndOfRewind();
+
+
+      /*
       foreach (GameObject player in Player_Lives)
       {
         if(player.GetComponent<PlayerController>().remain == maxActionCount)
@@ -74,6 +84,7 @@ public class GameController : MonoBehaviour
           player.GetComponent<PlayerController>().PlayStep(maxActionCount - remainingActionCount);
         }
       }
+      */
     }
 
 
@@ -92,31 +103,28 @@ public class GameController : MonoBehaviour
 
      }
 
-
-    public void HandleExhaustedPlayer()
-    {
-      if (CurrentActivePlayer.GetComponent<PlayerController>().exhausted && Input.anyKeyDown)
-      {
+    public void CheckEndOfRewind(){
+      
+      if(remainingActionCount == 0){
+        
+        remainingActionCount = maxActionCount;
+        CurrentActivePlayer.SoftReset(spawnPoint);
+        ReplayAllAvailable();
         remainingRewindCount--;
-        // Naming the exhausted player and incrementing the generation counter
-        CurrentActivePlayer.gameObject.name = "PlayerLife" + playerGenerationCounter;
-        CurrentActivePlayer.GetComponent<PlayerController>().remain = maxActionCount;
-        CurrentActivePlayer.GetComponent<PlayerController>().exhausted = false;
-        CurrentActivePlayer.transform.position = spawnPoint;
-        playerGenerationCounter++;
-        // Instantiating the new player
-        GameObject newPlayer = Instantiate(CurrentActivePlayer, new Vector3(spawnPoint.x, spawnPoint.y, 0), Quaternion.identity);
-        PlayerController newPlayerController = newPlayer.GetComponent<PlayerController>();
-        newPlayerController.playerGeneration = playerGenerationCounter;
-        newPlayerController.gameController = this; // Linking the GameController
-        newPlayerController.exhausted = false;
-        Player_Lives.Add(newPlayer);
-        // Setting the new player as the active player
-        CurrentActivePlayer = newPlayer;
-        CurrentActivePlayer.GetComponent<PlayerController>().exhausted = false;
 
-        // Setting the exhausted flag to false for the new player
+        CurrentActivePlayer = Player_Live[maxRewindCount - remainingRewindCount];
+        
       }
+    }
+
+    public void ResetAllAvailable(){
+
+      for(int i =0; i < 3; i++){
+        if(Player_Live[i].isInReplay){
+          Player_Live[i].SoftReset(spawnPoint);
+        }
+      }
+
     }
 
     void CheckPause(){
@@ -125,5 +133,14 @@ public class GameController : MonoBehaviour
             Menu.gameObject.SetActive(true);
             Time.timeScale = 0;
         }
+    }
+
+
+    void ReplayAllAvailable(){
+      for(int i = 0; i < 3; i++){
+        if(Player_Live[i].isInReplay){
+            Player_Live[i].PlayStep(maxActionCount - remainingActionCount);
+        }
+      }
     }
 }

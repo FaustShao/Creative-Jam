@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     targetPosition = transform.position;
     playerActionsList = new List<string>();
     respawnPoint = transform.position;
-    remain = gameController.maxActionCount;
+    //remain = gameController.maxActionCount;
     Debug.Log("remain is:"+remain);
   }
 
@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
         isKicking = true;
         animator.SetBool("isKicking", true);
         hit.collider.transform.position += direction * gridSize; // Move the box
-        remain -= 1;
+       // remain -= 1;
       }
 
       else if (hit.collider != null && hit.collider.CompareTag("Wall")) {
@@ -99,9 +99,9 @@ public class PlayerController : MonoBehaviour
         targetPosition = transform.position + direction * gridSize;
         isMoving = true;
         animator.SetBool("isMoving", true);
-        remain -= 1;
+        //remain -= 1;
       }
-      if(!isBlockedByWall && playerActionsList.Count < gameController.maxActionCount){
+      if(!isBlockedByWall){
         if (direction == Vector3.up)
         {
           playerActionsList.Add("w");
@@ -149,8 +149,8 @@ public class PlayerController : MonoBehaviour
 
     // Update exhausted state based on remainingActionCount from GameController
     //exhausted = gameController.remainingActionCount <= 0;
-    exhausted = remain <= 0;
-    Debug.Log(remain);
+    //exhausted = remain <= 0;
+    //Debug.Log(remain);
     //Debug.Log(gameController.remainingActionCount);
     animator.SetBool("isExhausted", exhausted);
   }
@@ -199,5 +199,12 @@ public class PlayerController : MonoBehaviour
       default: return Vector3.zero;
     }
   }
+
+  public void SoftReset(Vector3 pos){
+    isInReplay = true;
+    transform.position = pos;
+  }
+
+
 
 }
