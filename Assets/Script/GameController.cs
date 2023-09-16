@@ -46,7 +46,7 @@ public class GameController : MonoBehaviour
     void Update()
     {
         if(Goal.isActivated){
-
+            WinGame();
         }
     }
 
@@ -72,7 +72,7 @@ public class GameController : MonoBehaviour
         //TODO: add Game Win Event ;
 
         Debug.Log("TODO: Activate Win Game Effect");
-        
+
 
     }
 }
