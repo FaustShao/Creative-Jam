@@ -39,7 +39,11 @@ public class DialogueTrigger : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {   
-        Debug.Log(other);
+        
+        PlayerController Player = other.gameObject.GetComponent<PlayerController>();
+        Debug.Log(other.gameObject.CompareTag("Player"));
+
+        Player.isInDialogue = dialogue.isInDialogue;
         if(Input.GetKeyDown(InteractionKeyBind) && !dialogue.isInDialogue){
 
             if(index <= dialogues.Length - 1){
