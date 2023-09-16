@@ -4,32 +4,40 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
   public float moveSpeed = 1f;
-  public float gridSize = 1f; // Set this to your grid size
-  private Vector3 targetPosition;
-  private bool isMoving;
-  private bool isBlockedByWall = false;
-  private Vector3 currentTransform = new Vector3(1,1,1);
-  public bool isInDialogue = false;
-  public int playerGeneration = 0;
+  public float gridSize = 1f;
   public Animator animator;
-  public List<string> playerActionsList;
-  public bool isInReplay = false;
-  private Vector3 respawnPoint;
-  public GameController gameController; // Reference to the GameController script
 
-  private bool isKicking = false;
+  private Vector3 targetPosition;
+  private Vector3 respawnPoint;
+  private Vector3 currentTransform = new Vector3(1, 1, 1);
+  private bool isBlockedByWall = false;
+
+  public bool isInDialogue = false;
+  public bool isInReplay = false;
+  public bool isMoving = false;
+  public bool isKicking = false;
   public bool exhausted = false;
-  public int remain;
+
+  public List<string> playerActionsList;
+
   void Start()
   {
     targetPosition = transform.position;
-    playerActionsList = new List<string>();
     respawnPoint = transform.position;
-    remain = gameController.maxActionCount;
-    Debug.Log("remain is:"+remain);
+    playerActionsList = new List<string>();
   }
 
   void FixedUpdate()
+  {
+    CheckPlayerInput();
+  }
+
+  void Update()
+  {
+    UpdateMovementAndAnimation();
+  }
+
+  public void CheckPlayerInput()
   {
     if (isMoving || exhausted || isInDialogue || isInReplay)
       return;
@@ -38,121 +46,120 @@ public class PlayerController : MonoBehaviour
     float v = Input.GetAxisRaw("Vertical");
 
     // Prevent diagonal movement
-    if (h != 0 && v != 0)
-    {
-      h = 0;
-      v = 0;
-    }
+    if (h != 0 && v != 0) { h = 0; v = 0; }
 
     if (h != 0 || v != 0)
     {
-      if (v == 0)
-      {
-        if (h > 0)
-        {
-          transform.localScale = new Vector3(1, 1, 1);
-          currentTransform = transform.localScale;
-        }
-        else
-        {
-          transform.localScale = new Vector3(-1, 1, 1);
-          currentTransform = transform.localScale;
-        }
-      }
-      else
-      {
-        transform.localScale = currentTransform;
-      }
+      SetTransformScale(h, v);
       isBlockedByWall = false;
       Move(new Vector3(h, v, 0));
-      gameController.ProceedGame();
+      Debug.Log(v);
+    }
+  }
+
+  void SetTransformScale(float h, float v)
+  {
+    if (v == 0)
+    {
+      transform.localScale = h > 0 ? new Vector3(1, 1, 1) : new Vector3(-1, 1, 1);
+      currentTransform = transform.localScale;
+    }
+    else
+    {
+      transform.localScale = currentTransform;
     }
   }
 
   void Move(Vector3 direction)
   {
+    Debug.Log(direction);
     if ((isMoving || isKicking) || (exhausted && !isInReplay) || isInDialogue || isInReplay)
       return;
 
-    if (!isMoving && !isKicking)
-    {
-      RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, gridSize);
-      if (hit.collider != null && hit.collider.CompareTag("MovableBox"))
-      {
-        // kick the box
-        isKicking = true;
-        animator.SetBool("isKicking", true);
-        hit.collider.transform.position += direction * gridSize; // Move the box
-        remain -= 1;
-      }
-
-      else if (hit.collider != null && hit.collider.CompareTag("Wall")) {
-        // do nothing
-          Debug.Log("Hit wall");
-          isBlockedByWall = true;
-      }
-
-      else
-      {
-        Debug.Log("Hit nothing");
-        // Move the player
-        targetPosition = transform.position + direction * gridSize;
-        isMoving = true;
-        animator.SetBool("isMoving", true);
-        remain -= 1;
-      }
-      if(!isBlockedByWall && playerActionsList.Count < gameController.maxActionCount){
-        if (direction == Vector3.up)
-        {
-          playerActionsList.Add("w");
-        }
-        else if (direction == Vector3.left)
-        {
-          playerActionsList.Add("a");
-        }
-        else if (direction == Vector3.down)
-        {
-          playerActionsList.Add("s");
-        }
-        else if (direction == Vector3.right)
-        {
-          playerActionsList.Add("d");
-        }
-      }
-      
-    }
-    Debug.Log(remain);
-    Debug.Log("Player actions: " + string.Join(", ", playerActionsList));
+    PerformRaycastAndMove(direction);
+    if (!isBlockedByWall) RecordPlayerMotion(direction);
   }
 
-  void Update()
+  void PerformRaycastAndMove(Vector3 direction)
   {
-    if (isMoving)
+    RaycastHit2D hit = Physics2D.Raycast(transform.position + direction/2, direction/2, gridSize);
+    if (hit.collider == null) { SetTargetPosition(direction); return; }
+    Debug.Log(hit.collider.gameObject);
+    if (hit.collider.CompareTag("MovableBox")) { KickBox(hit, direction); return; }
+    if (hit.collider.CompareTag("Wall")) { isBlockedByWall = true; }
+  }
+
+  void SetTargetPosition(Vector3 direction)
+  {
+    targetPosition = transform.position + direction * gridSize;
+    isMoving = true;
+    animator.SetBool("isMoving", true);
+  }
+
+  void KickBox(RaycastHit2D hit, Vector3 direction)
+  {
+    isKicking = true;
+    animator.SetBool("isKicking", true);
+    hit.collider.transform.position += direction * gridSize;
+  }
+
+  public void RecordPlayerMotion(Vector3 direction)
+  {
+    playerActionsList.Add(direction == Vector3.up ? "w" : direction == Vector3.left ? "a" : direction == Vector3.down ? "s" : "d");
+  }
+
+  public void UpdateMovementAndAnimation()
+  {
+    if (isMoving && transform.position == targetPosition)
     {
-      if (transform.position != targetPosition)
-      {
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-      }
-      else
-      {
-        isMoving = false;
-        animator.SetBool("isMoving", false);
-      }
+      isMoving = false;
+      animator.SetBool("isMoving", false);
+    }
+    else if (isMoving)
+    {
+      transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
     }
 
-    if (isKicking && animator.GetCurrentAnimatorStateInfo(0).IsName("Kicking") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.001f)
+    CheckKickAnimationStatus();
+    animator.SetBool("isExhausted", exhausted);
+  }
+
+  void CheckKickAnimationStatus()
+  {
+    if (!isKicking) return;
+
+    if (animator.GetCurrentAnimatorStateInfo(0).IsName("Kicking") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.001f)
     {
-      Debug.Log("false!");
       isKicking = false;
       animator.SetBool("isKicking", false);
     }
+  }
 
-    // Update exhausted state based on remainingActionCount from GameController
-    //exhausted = gameController.remainingActionCount <= 0;
-    exhausted = remain <= 0;
-    Debug.Log(remain);
-    //Debug.Log(gameController.remainingActionCount);
-    animator.SetBool("isExhausted", exhausted);
+  public void PlayStep(int stepIndex)
+  {
+    if (stepIndex >= playerActionsList.Count) return;
+
+    isInReplay = true;
+    animator.SetBool("isReplayed", true);
+
+    string action = playerActionsList[stepIndex];
+    Vector3 direction = ActionToDirection(action);
+
+    isInReplay = false;
+    Move(direction);
+    isInReplay = true;
+  }
+
+  private Vector3 ActionToDirection(string action)
+  {
+    return action switch
+    {
+      "w" => Vector3.up,
+      "a" => Vector3.left,
+      "s" => Vector3.down,
+      "d" => Vector3.right,
+      _ => Vector3.zero,
+    };
   }
 
   public void EndKick()
@@ -160,44 +167,4 @@ public class PlayerController : MonoBehaviour
     isKicking = false;
     animator.SetBool("isKicking", false);
   }
-
-  public void PlayStep(int stepIndex)
-  {
-    isInReplay = true;
-    animator.SetBool("isReplayed", true);
-    //ResetToRespawnPoint();
-
-    if (stepIndex < playerActionsList.Count)
-    {
-      string action = playerActionsList[stepIndex];
-
-      // Convert the action string to a direction and move the player
-      Vector3 direction = ActionToDirection(action);
-      isInReplay = false;
-      Move(direction);
-      isInReplay = true;
-    }
-  }
-
-  public void ResetToRespawnPoint()
-  {
-    transform.position = respawnPoint;  // Set position to respawn point
-    animator.SetBool("isReplaying", false);  // Reset replaying flag
-    animator.SetBool("isMoving", false);  // Reset other animator flags
-    animator.SetBool("isKicking", false);  // Reset other animator flags
-    isInReplay = false;  // Reset replay flag
-  }
-
-  private Vector3 ActionToDirection(string action)
-  {
-    switch (action)
-    {
-      case "w": return Vector3.up;
-      case "a": return Vector3.left;
-      case "s": return Vector3.down;
-      case "d": return Vector3.right;
-      default: return Vector3.zero;
-    }
-  }
-
 }
