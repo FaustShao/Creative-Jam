@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6932174213777713443}
+  - component: {fileID: 8708324036764893930}
   m_Layer: 0
   m_Name: GameControllerPrefab
   m_TagString: Untagged
@@ -31,3 +32,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8708324036764893930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5846734042229651483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 992ec16098a63c944b3e75b85c948fec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxActionCount: 0
+  nextScene: 
+  remainingActionCount: 0
+  maxRewindCount: 0
+  remainingRewindCount: 0
+  isSolved: 0
+  CurrentActivePlayer: {fileID: 0}
+  Player_Lives: []
+  Goal: {fileID: 0}
+  Walls: []
+  Turrets: []
+  Door: {fileID: 0}
+  DoorTrigger: {fileID: 0}

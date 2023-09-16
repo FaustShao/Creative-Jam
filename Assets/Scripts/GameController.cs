@@ -10,13 +10,15 @@ public class GameController : MonoBehaviour
 
     [Header("SceneKeyAttributes")]
     public int maxActionCount;
-
+    public string nextScene;
     public int remainingActionCount;
     public int maxRewindCount;
 
     public int remainingRewindCount;
     
     public bool isSolved;
+
+    public MenuController Menu;
 
     //TOD: Replace GameObject Class with actual class
     [Header("GameObjects")]
@@ -45,6 +47,8 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        CheckPause();
         //if(Goal.isActivated){
             //WinGame();
         //}
@@ -73,5 +77,13 @@ public class GameController : MonoBehaviour
         Debug.Log("TODO: Activate Win Game Effect");
 
 
+    }
+
+    void CheckPause(){
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            Menu.isActiveOnStart = true;
+            Menu.gameObject.SetActive(true);
+            Time.timeScale = 0;
+        }
     }
 }
