@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour
     public int maxRewindCount;
 
     public int remainingRewindCount;
-    
+    public Vector2 spawnPoint;
     public bool isSolved;
 
     public MenuController Menu;
@@ -23,8 +23,8 @@ public class GameController : MonoBehaviour
     //TOD: Replace GameObject Class with actual class
     [Header("GameObjects")]
 
-    public PlayerController CurrentActivePlayer;
-    public List<PlayerController> Player_Lives;
+    public GameObject CurrentActivePlayer;
+    public List<GameObject> Player_Lives;
 
     public GoalDevice Goal;
     public List<GameObject> Walls;
@@ -35,13 +35,24 @@ public class GameController : MonoBehaviour
 
     public Locks DoorTrigger;
 
+    [Header("Prefabs")]
+    public GameObject playerPrefab;
+
 
     void Start()
     {
-        //isSolved = false;
-        //remainingActionCount = maxActionCount;
-        //remainingRewindCount = maxRewindCount;
-        //CurrentActivePlayer = Player_Lives[0];
+      // Set the initial game state
+      isSolved = false;
+      remainingActionCount = maxActionCount;
+      remainingRewindCount = maxRewindCount;
+
+      // Instantiate the first player at the spawn point and set it as the current active player
+      GameObject newPlayer = Instantiate(playerPrefab, new Vector3(spawnPoint.x, spawnPoint.y, 0), Quaternion.identity);
+      CurrentActivePlayer = newPlayer;
+      Player_Lives.Add(newPlayer);
+
+      // Link the new player to this game controller
+      newPlayer.GetComponent<PlayerController>().gameController = this;
     }
 
     // Update is called once per frame
@@ -55,10 +66,10 @@ public class GameController : MonoBehaviour
     }
 
     public void ProceedGame(){
-        remainingActionCount--;
-        foreach (PlayerController p in Player_Lives){
-            p.PlayStep(maxActionCount - remainingActionCount);
-        }
+        //remainingActionCount--;
+        //foreach (PlayerController p in Player_Lives){
+            //p.PlayStep(maxActionCount - remainingActionCount);
+        //}
     }
 
     public void FailGame(){
