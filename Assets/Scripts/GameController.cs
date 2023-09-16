@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
     public int remainingActionCount;
     public int maxRewindCount;
 
-    public int remainingRewindCount;
+    public int remainingRewindCount = 6;
     
     public bool isSolved;
 
@@ -36,18 +36,18 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        isSolved = false;
-        remainingActionCount = maxActionCount;
-        remainingRewindCount = maxRewindCount;
-        CurrentActivePlayer = Player_Lives[0];
+        //isSolved = false;
+        //remainingActionCount = maxActionCount;
+        //remainingRewindCount = maxRewindCount;
+        //CurrentActivePlayer = Player_Lives[0];
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Goal.isActivated){
-            WinGame();
-        }
+        //if(Goal.isActivated){
+            //WinGame();
+        //}
     }
 
     public void ProceedGame(){
