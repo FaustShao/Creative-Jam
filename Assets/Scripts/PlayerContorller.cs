@@ -8,15 +8,16 @@ public class PlayerController : MonoBehaviour
   private Vector3 targetPosition;
   private bool isMoving;
   private Vector3 currentTransform = new Vector3(1,1,1);
+  public bool isInDialogue = false;
 
   public Animator animator;
   public List<string> playerActionsList;
 
   public GameController gameController; // Reference to the GameController script
-
+  
   private bool isKicking = false;
   private bool exhausted = false;
-  private int remain = 6;
+  private int remain = 6; //TO DO: change this to actual remainingPlayerActions
  
   void Start()
   {
@@ -25,7 +26,7 @@ public class PlayerController : MonoBehaviour
 
   void FixedUpdate()
   {
-    if (isMoving || exhausted)
+    if (isMoving || exhausted || isInDialogue)
       return;
 
     float h = Input.GetAxisRaw("Horizontal");
@@ -63,7 +64,7 @@ public class PlayerController : MonoBehaviour
 
   void Move(Vector3 direction)
   {
-    if ((isMoving || isKicking) || exhausted)
+    if ((isMoving || isKicking) || exhausted || isInDialogue)
       return;
 
     if (!isMoving && !isKicking)
@@ -85,8 +86,26 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("isMoving", true);
         remain -= 1;
       }
+
+      if (direction == Vector3.up)
+      {
+        playerActionsList.Add("w");
+      }
+      else if (direction == Vector3.left)
+      {
+        playerActionsList.Add("a");
+      }
+      else if (direction == Vector3.down)
+      {
+        playerActionsList.Add("s");
+      }
+      else if (direction == Vector3.right)
+      {
+        playerActionsList.Add("d");
+      }
     }
     Debug.Log(remain);
+    Debug.Log("Player actions: " + string.Join(", ", playerActionsList));
   }
 
   void Update()

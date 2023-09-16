@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
     public int remainingActionCount;
     public int maxRewindCount;
 
-    public int remainingRewindCount = 6;
+    public int remainingRewindCount;
     
     public bool isSolved;
 
