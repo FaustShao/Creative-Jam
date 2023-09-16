@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
   public float gridSize = 1f; // Set this to your grid size
   private Vector3 targetPosition;
   private bool isMoving;
+  private bool isBlockedByWall = false;
   private Vector3 currentTransform = new Vector3(1,1,1);
   public bool isInDialogue = false;
 
@@ -58,6 +59,7 @@ public class PlayerController : MonoBehaviour
       {
         transform.localScale = currentTransform;
       }
+      isBlockedByWall = false;
       Move(new Vector3(h, v, 0));
     }
   }
@@ -78,31 +80,41 @@ public class PlayerController : MonoBehaviour
         hit.collider.transform.position += direction * gridSize; // Move the box
         remain -= 1;
       }
+
+      else if (hit.collider != null && hit.collider.CompareTag("Wall")) {
+        // do nothing
+          Debug.Log("Hit wall");
+          isBlockedByWall = true;
+      }
+
       else
       {
+        Debug.Log("Hit nothing");
         // Move the player
         targetPosition = transform.position + direction * gridSize;
         isMoving = true;
         animator.SetBool("isMoving", true);
         remain -= 1;
       }
-
-      if (direction == Vector3.up)
-      {
-        playerActionsList.Add("w");
+      if(!isBlockedByWall){
+        if (direction == Vector3.up)
+        {
+          playerActionsList.Add("w");
+        }
+        else if (direction == Vector3.left)
+        {
+          playerActionsList.Add("a");
+        }
+        else if (direction == Vector3.down)
+        {
+          playerActionsList.Add("s");
+        }
+        else if (direction == Vector3.right)
+        {
+          playerActionsList.Add("d");
+        }
       }
-      else if (direction == Vector3.left)
-      {
-        playerActionsList.Add("a");
-      }
-      else if (direction == Vector3.down)
-      {
-        playerActionsList.Add("s");
-      }
-      else if (direction == Vector3.right)
-      {
-        playerActionsList.Add("d");
-      }
+      
     }
     Debug.Log(remain);
     Debug.Log("Player actions: " + string.Join(", ", playerActionsList));
