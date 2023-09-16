@@ -323,6 +323,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: player_0
       objectReference: {fileID: 0}
+    - target: {fileID: 5916686213767524407, guid: e97aa9302434ff14b8ad2c25f03e765a, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 8271757787949697523, guid: e97aa9302434ff14b8ad2c25f03e765a, type: 3}
       propertyPath: m_BodyType
       value: 1
