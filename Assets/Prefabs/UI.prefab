@@ -1082,6 +1082,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3007743424635475307, guid: de95971a1ccd6b84b813e929f9bf332e, type: 3}
+      propertyPath: SelectedImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 6af2f69b0e0360942899bd83a60c0d01, type: 3}
+    - target: {fileID: 3007743424635475307, guid: de95971a1ccd6b84b813e929f9bf332e, type: 3}
+      propertyPath: UnselectedImage
+      value: 
+      objectReference: {fileID: 21300000, guid: cd53db6e0904875408752ef3163dc47d, type: 3}
     - target: {fileID: 3735727396788363853, guid: de95971a1ccd6b84b813e929f9bf332e, type: 3}
       propertyPath: m_Name
       value: Menu
@@ -1098,6 +1106,14 @@ PrefabInstance:
       propertyPath: choices.Array.data[1]
       value: 
       objectReference: {fileID: 6737619751374781651}
+    - target: {fileID: 8320803346501861795, guid: de95971a1ccd6b84b813e929f9bf332e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 8320803346501861795, guid: de95971a1ccd6b84b813e929f9bf332e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5820429223556134140, guid: de95971a1ccd6b84b813e929f9bf332e, type: 3}
