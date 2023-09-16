@@ -662,11 +662,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992ec16098a63c944b3e75b85c948fec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxActionCount: 6
   remainingActionCount: 6
-  maxRewindCount: 0
   remainingRewindCount: 0
-  spawnPoint: {x: 0, y: 0}
   isSolved: 0
   CurrentActivePlayer: {fileID: 0}
   Player_Lives: []
@@ -676,6 +673,7 @@ MonoBehaviour:
   Door: {fileID: 0}
   DoorTrigger: {fileID: 0}
   playerPrefab: {fileID: 5916686213767524407, guid: e97aa9302434ff14b8ad2c25f03e765a, type: 3}
+  level1Object: {fileID: 6396421668656060059, guid: af1f53a52640a244eb38969a28d2f3d1, type: 3}
 --- !u!4 &1315108188
 Transform:
   m_ObjectHideFlags: 0

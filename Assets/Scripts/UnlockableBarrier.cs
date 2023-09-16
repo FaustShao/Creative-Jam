@@ -27,6 +27,10 @@ public class UnlockableBarrier : MonoBehaviour
             }
         }
         Unlocked = check;
+
+        if(Unlocked){
+            Debug.Log("Unlocked Door");
+        }
     }
 
     public void SoftReset(){

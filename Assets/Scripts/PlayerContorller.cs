@@ -10,14 +10,14 @@ public class PlayerController : MonoBehaviour
   private bool isBlockedByWall = false;
   private Vector3 currentTransform = new Vector3(1,1,1);
   public bool isInDialogue = false;
-
+  public int playerGeneration = 0;
   public Animator animator;
   public List<string> playerActionsList;
 
   public GameController gameController; // Reference to the GameController script
-  
+
   private bool isKicking = false;
-  private bool exhausted = false;
+  public bool exhausted = false;
   private int remain = 6; //TO DO: change this to actual remainingPlayerActions
  
   void Start()
@@ -155,8 +155,28 @@ public class PlayerController : MonoBehaviour
     animator.SetBool("isKicking", false);
   }
 
-  public void PlayStep(int i)
+  public void PlayStep(int stepIndex)
   {
-    Debug.Log("TODO: Play actoin step");
+    if (stepIndex < playerActionsList.Count)
+    {
+      string action = playerActionsList[stepIndex];
+
+      // Convert the action string to a direction and move the player
+      Vector3 direction = ActionToDirection(action);
+      Move(direction);
+    }
   }
+
+  private Vector3 ActionToDirection(string action)
+  {
+    switch (action)
+    {
+      case "w": return Vector3.up;
+      case "a": return Vector3.left;
+      case "s": return Vector3.down;
+      case "d": return Vector3.right;
+      default: return Vector3.zero;
+    }
+  }
+
 }

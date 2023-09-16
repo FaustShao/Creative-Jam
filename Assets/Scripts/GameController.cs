@@ -5,17 +5,15 @@ using  UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    // Start is called before the first frame update
-
-
     [Header("SceneKeyAttributes")]
     public int maxActionCount;
     public string nextScene;
-    public int remainingActionCount;
     public int maxRewindCount;
-
-    public int remainingRewindCount;
+    public string sceneName;
     public Vector2 spawnPoint;
+    public int remainingActionCount;
+    public int playerGenerationCounter = 0;
+    public int remainingRewindCount;
     public bool isSolved;
 
     public MenuController Menu;
@@ -25,26 +23,26 @@ public class GameController : MonoBehaviour
 
     public GameObject CurrentActivePlayer;
     public List<GameObject> Player_Lives;
-
     public GoalDevice Goal;
     public List<GameObject> Walls;
-
     public List<GameObject> Turrets;
-
     public UnlockableBarrier Door;
-
     public Locks DoorTrigger;
 
     [Header("Prefabs")]
     public GameObject playerPrefab;
+    public GameObject level1Object;
+
+    void Awake()
+    {
+      DontDestroyOnLoad(gameObject);
+    }
 
 
     void Start()
     {
       // Set the initial game state
       isSolved = false;
-      remainingActionCount = maxActionCount;
-      remainingRewindCount = maxRewindCount;
 
       // Instantiate the first player at the spawn point and set it as the current active player
       GameObject newPlayer = Instantiate(playerPrefab, new Vector3(spawnPoint.x, spawnPoint.y, 0), Quaternion.identity);
@@ -58,19 +56,24 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        CheckPause();
-        //if(Goal.isActivated){
-            //WinGame();
-        //}
+      HandleExhaustedPlayer();
+      CheckPause();
     }
 
-    public void ProceedGame(){
-        //remainingActionCount--;
-        //foreach (PlayerController p in Player_Lives){
-            //p.PlayStep(maxActionCount - remainingActionCount);
-        //}
+    public void ProceedGame()
+    {
+      remainingActionCount--;
+
+      foreach (GameObject player in Player_Lives)
+      {
+        // Move each player according to their recorded action
+        if (player.GetComponent<PlayerController>().playerGeneration < playerGenerationCounter)
+        {
+          player.GetComponent<PlayerController>().PlayStep(maxActionCount - remainingActionCount);
+        }
+      }
     }
+
 
     public void FailGame(){
         //TODO: add Game Fail ;
@@ -78,8 +81,6 @@ public class GameController : MonoBehaviour
         //reload Current Scene;
         Scene scene = SceneManager.GetActiveScene(); 
         SceneManager.LoadScene(scene.name);
-
-
     }
 
      public void WinGame(){
@@ -87,7 +88,30 @@ public class GameController : MonoBehaviour
 
         Debug.Log("TODO: Activate Win Game Effect");
 
+     }
 
+
+    public void HandleExhaustedPlayer()
+    {
+      if (CurrentActivePlayer.GetComponent<PlayerController>().exhausted)
+      {
+        // Naming the exhausted player and incrementing the generation counter
+        CurrentActivePlayer.gameObject.name = "PlayerLife" + playerGenerationCounter;
+        playerGenerationCounter++;
+
+        // Instantiating the new player
+        GameObject newPlayer = Instantiate(CurrentActivePlayer, new Vector3(spawnPoint.x, spawnPoint.y, 0), Quaternion.identity);
+        PlayerController newPlayerController = newPlayer.GetComponent<PlayerController>();
+        newPlayerController.playerGeneration = playerGenerationCounter;
+        newPlayerController.gameController = this; // Linking the GameController
+        newPlayerController.exhausted = false;
+        Player_Lives.Add(newPlayer);
+        // Setting the new player as the active player
+        CurrentActivePlayer = newPlayer;
+        CurrentActivePlayer.GetComponent<PlayerController>().exhausted = false;
+
+        // Setting the exhausted flag to false for the new player
+      }
     }
 
     void CheckPause(){
