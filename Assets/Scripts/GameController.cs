@@ -45,7 +45,11 @@ public class GameController : MonoBehaviour
       isPause = false; 
 
       CurrentActivePlayer = Player_Live[maxRewindCount - remainingRewindCount];
-      
+      for(int i =0; i < Player_Live.Count;i++){
+        if(i != maxRewindCount - remainingRewindCount){
+          Player_Live[i].gameObject.SetActive(false);
+        }
+      }
     }
 
     // Update is called once per frame
@@ -54,7 +58,6 @@ public class GameController : MonoBehaviour
       CheckPause();
       if(isPause){
         CheckFinishedReplay();
-
       }
     }
 
@@ -62,7 +65,6 @@ public class GameController : MonoBehaviour
     void CheckFinishedReplay(){
       if(CurrentActivePlayer.ReplayIndex > 0){
         isPause = false;
-
         playerIndex++;
         if(playerIndex < Player_Live.Count){
           CurrentActivePlayer = Player_Live[playerIndex];
@@ -78,8 +80,28 @@ public class GameController : MonoBehaviour
       if(remainingActionCount == 0){
         remainingRewindCount--;
         remainingActionCount = maxActionCount;
-        CurrentActivePlayer.isPhantom = true;
-        isPause = true;
+        CurrentActivePlayer.ConvertToPhantom();
+        ResetAllPhantom();
+        GetNextPlayer();
+        
+      }
+    }
+
+
+    
+
+    void ResetAllPhantom(){
+      foreach ( PlayerController p in Player_Live){
+        p.ResetPhantom();
+      }
+    }
+    public void GetNextPlayer(){
+      playerIndex++;
+      if(playerIndex < Player_Live.Count){
+        CurrentActivePlayer = Player_Live[playerIndex];
+        CurrentActivePlayer.gameObject.SetActive(true);
+      }else{
+        FailGame();
       }
     }
 
@@ -103,8 +125,4 @@ public class GameController : MonoBehaviour
             Time.timeScale = 0;
         }
     }
-
-
-
-    
 }
