@@ -6,6 +6,9 @@ TagManager:
   tags:
   - MovableBox
   - Wall
+  - block
+  - Endpoint
+  - Key
   layers:
   - Default
   - TransparentFX
