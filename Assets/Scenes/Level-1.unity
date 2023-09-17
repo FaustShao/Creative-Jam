@@ -422,7 +422,7 @@ Tilemap:
   - first: {x: -1, y: 1, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 0
+      m_TileIndex: 1
       m_TileSpriteIndex: 1
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
@@ -431,10 +431,10 @@ Tilemap:
       m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
   m_TileAssetArray:
-  - m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: e1b45732439a9fe439ae30098b2fbb60, type: 2}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: e1b45732439a9fe439ae30098b2fbb60, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
@@ -497,6 +497,18 @@ PrefabInstance:
     - target: {fileID: 1982945936934567133, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
       propertyPath: m_Name
       value: WinCheckerBox (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5808
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5808
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.726
       objectReference: {fileID: 0}
     - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1142,6 +1154,18 @@ PrefabInstance:
     - target: {fileID: 1982945936934567133, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
       propertyPath: m_Name
       value: WinCheckerBox (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.47472802
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.47472802
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.59341
       objectReference: {fileID: 0}
     - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2368,6 +2392,18 @@ PrefabInstance:
     - target: {fileID: 1982945936934567133, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
       propertyPath: m_Name
       value: WinCheckerBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.52423203
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.52423203
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.65529
       objectReference: {fileID: 0}
     - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
       propertyPath: m_LocalPosition.x
