@@ -17,7 +17,10 @@ public class GameController : MonoBehaviour
     public bool isSolved;
     public bool ActiveFailCheck;
     public MenuController Menu;
-
+    public Animator AliveAnimator;
+    public Animator PhantomAnimator;
+    public RuntimeAnimatorController AliveController;
+    public RuntimeAnimatorController PhantomController;
     //TOD: Replace GameObject Class with actual class
     [Header("GameObjects")]
     public GameObject Endpoint;
@@ -126,6 +129,7 @@ public class GameController : MonoBehaviour
         //death animation then Convert to Phantom
         remainingActionCount = maxActionCount;
         ResetWalls();
+        SetPhantomAnimator();
         CurrentActivePlayer.ConvertToPhantom();
         ResetAllPhantom();
         GetNextPlayer();
@@ -159,6 +163,11 @@ public class GameController : MonoBehaviour
           
         }
       }
+    }
+
+    public void SetPhantomAnimator()
+    {
+        CurrentActivePlayer.animator.runtimeAnimatorController = PhantomController;
     }
 
     void ResetAllPhantom(){
