@@ -29,6 +29,9 @@ public class GameController : MonoBehaviour
     public UnlockableBarrier Door;
     public Locks DoorTrigger;
 
+    int playerIndex = 0;
+    bool isPause;
+
     //[Header("Prefabs")]
     //public GameObject playerPrefab;
     //public GameObject level1Object;
@@ -39,34 +42,76 @@ public class GameController : MonoBehaviour
       isSolved = false;
       remainingActionCount = maxActionCount;
       remainingRewindCount = maxRewindCount;
- 
+      isPause = false; 
 
       CurrentActivePlayer = Player_Live[maxRewindCount - remainingRewindCount];
-      CurrentActivePlayer.isAvailable = true;
-
-      for(int i = 0; i < Player_Live.Count; i++){
-        if(i != (maxRewindCount - remainingRewindCount)){
-          Player_Live[i].respawnPoint = Player_Live[i].transform.position;
-          Player_Live[i].isAvailable = false;
+      for(int i =0; i < Player_Live.Count;i++){
+        if(i != maxRewindCount - remainingRewindCount){
           Player_Live[i].gameObject.SetActive(false);
         }
       }
     }
 
+
+    public bool playerAllSettle(){
+      
+      foreach(PlayerController p in Player_Live){
+        if (p.isMoving()) return false;
+      }
+      return true;
+    }
     // Update is called once per frame
     void Update()
     {
       CheckPause();
+      if(isPause){
+        CheckFinishedReplay();
+      }
     }
 
-    public void ProceedGame()
-    {
-      ResetAllUnAvailable();
+
+    void CheckFinishedReplay(){
+      if(CurrentActivePlayer.ReplayIndex > 0){
+        isPause = false;
+        playerIndex++;
+        if(playerIndex < Player_Live.Count){
+          CurrentActivePlayer = Player_Live[playerIndex];
+        }else{
+          FailGame();
+        }
+      }
+    }
+
+    public void DecreaseActionCount(){
       remainingActionCount--;
 
-      CheckEndOfRewind();
+      if(remainingActionCount == 0){
+        remainingRewindCount--;
+        remainingActionCount = maxActionCount;
+        CurrentActivePlayer.ConvertToPhantom();
+        ResetAllPhantom();
+        GetNextPlayer();
+        
+      }
     }
 
+
+    
+
+    void ResetAllPhantom(){
+      foreach ( PlayerController p in Player_Live){
+        p.ResetPhantom();
+      }
+    }
+    public void GetNextPlayer(){
+      playerIndex++;
+      if(playerIndex < Player_Live.Count){
+        CurrentActivePlayer = Player_Live[playerIndex];
+        CurrentActivePlayer.gameObject.SetActive(true);
+      }else{
+        FailGame();
+      }
+    }
 
     public void FailGame(){
         //TODO: add Game Fail ;
@@ -75,7 +120,6 @@ public class GameController : MonoBehaviour
         Scene scene = SceneManager.GetActiveScene(); 
         SceneManager.LoadScene(scene.name);
     }
-
      public void WinGame(){
         //TODO: add Game Win Event ;
 
@@ -83,41 +127,10 @@ public class GameController : MonoBehaviour
 
      }
 
-    public void CheckEndOfRewind(){
-      if(remainingActionCount == 0){
-        CurrentActivePlayer.isAvailable = false;
-        CurrentActivePlayer.exhausted = true;
-        remainingActionCount = maxActionCount;
-        remainingRewindCount--;
-        if(remainingRewindCount != 0){
-          int newIndex = maxRewindCount - remainingRewindCount;
-          CurrentActivePlayer = Player_Live[newIndex];
-          CurrentActivePlayer.gameObject.SetActive(true);
-          CurrentActivePlayer.isAvailable = true;
-        }else{
-          FailGame();
-        }
-      }
-    }
-
-    public void ResetAllUnAvailable(){
-      foreach ( PlayerController p in Player_Live){
-        if(p.exhausted){
-          p.SoftReset();
-          p.isInReplay = true;
-          p.exhausted = false;
-        }
-      }
-    }
-
     void CheckPause(){
         if(Input.GetKeyDown(KeyCode.Escape)){
             Menu.isActiveOnStart = true;
             Time.timeScale = 0;
         }
     }
-
-
-
-    
 }
