@@ -4508,6 +4508,12 @@ MonoBehaviour:
   remainingRewindCount: 0
   isSolved: 0
   Menu: {fileID: 0}
+  boxPositions:
+  - {x: 0, y: 0, z: 0}
+  - {x: -1.26, y: 0, z: 0}
+  boxs:
+  - {fileID: 566136453}
+  - {fileID: 238502785}
   CurrentActivePlayer: {fileID: 0}
   Player_Live:
   - {fileID: 1966566554}
