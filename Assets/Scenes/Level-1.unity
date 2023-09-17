@@ -967,6 +967,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
+      propertyPath: icons.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
+      propertyPath: dialogues.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
       propertyPath: icons.Array.data[0].icon.Array.data[0]
       value: 
       objectReference: {fileID: 21300000, guid: bfe2398ec6f990f4f955331f917a5748, type: 3}
@@ -982,6 +990,14 @@ PrefabInstance:
       propertyPath: icons.Array.data[1].icon.Array.data[1]
       value: 
       objectReference: {fileID: 21300000, guid: 1867962416312b444b5adfd66e8ef765, type: 3}
+    - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
+      propertyPath: dialogues.Array.data[0].dialogue.Array.data[0]
+      value: I hope You've Prepared Yourself.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
+      propertyPath: dialogues.Array.data[0].dialogue.Array.data[1]
+      value: THis will be you last and only chance.
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4162,8 +4178,8 @@ MonoBehaviour:
   Menu: {fileID: 1544739229}
   AliveAnimator: {fileID: 0}
   PhantomAnimator: {fileID: 0}
-  AliveController: {fileID: 0}
-  PhantomController: {fileID: 0}
+  AliveController: {fileID: 9100000, guid: 294ea389370df9f4e8bffcd794f49b03, type: 2}
+  PhantomController: {fileID: 9100000, guid: 9cc6a7ba6bc5f94499377fd129f89ddf, type: 2}
   Endpoint: {fileID: 96224296}
   boxPositions:
   - {x: 0, y: 0, z: 0}
@@ -4276,13 +4292,57 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
+      propertyPath: icons.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
+      propertyPath: icons.Array.data[0].icon.Array.size
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
+      propertyPath: icons.Array.data[1].icon.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
       propertyPath: icons.Array.data[0].icon.Array.data[0]
       value: 
-      objectReference: {fileID: 21300000, guid: ef538a645c8492f489712d2946b4167d, type: 3}
+      objectReference: {fileID: 21300000, guid: 2717a14592d234f469d54beb98e7959c, type: 3}
     - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
       propertyPath: icons.Array.data[0].icon.Array.data[1]
       value: 
       objectReference: {fileID: 21300000, guid: bfe2398ec6f990f4f955331f917a5748, type: 3}
+    - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
+      propertyPath: icons.Array.data[0].icon.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 2717a14592d234f469d54beb98e7959c, type: 3}
+    - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
+      propertyPath: icons.Array.data[0].icon.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300000, guid: bfe2398ec6f990f4f955331f917a5748, type: 3}
+    - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
+      propertyPath: icons.Array.data[0].icon.Array.data[4]
+      value: 
+      objectReference: {fileID: 21300000, guid: 2717a14592d234f469d54beb98e7959c, type: 3}
+    - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
+      propertyPath: icons.Array.data[0].icon.Array.data[5]
+      value: 
+      objectReference: {fileID: 21300000, guid: bfe2398ec6f990f4f955331f917a5748, type: 3}
+    - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
+      propertyPath: icons.Array.data[0].icon.Array.data[6]
+      value: 
+      objectReference: {fileID: 21300000, guid: 2717a14592d234f469d54beb98e7959c, type: 3}
+    - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
+      propertyPath: icons.Array.data[0].icon.Array.data[7]
+      value: 
+      objectReference: {fileID: 21300000, guid: bfe2398ec6f990f4f955331f917a5748, type: 3}
+    - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
+      propertyPath: icons.Array.data[0].icon.Array.data[8]
+      value: 
+      objectReference: {fileID: 21300000, guid: 2717a14592d234f469d54beb98e7959c, type: 3}
+    - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
+      propertyPath: icons.Array.data[0].icon.Array.data[9]
+      value: 
+      objectReference: {fileID: 21300000, guid: 371a672766b4d9b43ab63fd7e383be02, type: 3}
     - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
       propertyPath: icons.Array.data[1].icon.Array.data[0]
       value: 
@@ -4292,68 +4352,92 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: dd435e39b8639344d89ca8f06082bfcb, type: 3}
     - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
+      propertyPath: icons.Array.data[0].icon.Array.data[10]
+      value: 
+      objectReference: {fileID: 21300000, guid: 1867962416312b444b5adfd66e8ef765, type: 3}
+    - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
+      propertyPath: icons.Array.data[0].icon.Array.data[11]
+      value: 
+      objectReference: {fileID: 21300000, guid: 8e6771d21798bf54aa87e0212751bce8, type: 3}
+    - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
+      propertyPath: icons.Array.data[0].icon.Array.data[12]
+      value: 
+      objectReference: {fileID: 21300000, guid: dd435e39b8639344d89ca8f06082bfcb, type: 3}
+    - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
       propertyPath: dialogues.Array.data[0].dialogue.Array.size
       value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
+      propertyPath: dialogues.Array.data[1].dialogue.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
       propertyPath: dialogues.Array.data[0].dialogue.Array.data[0]
-      value: 'Cat: Meow~ meow? meow? '
+      value: 'Cat: nya~ nya? nya? '
       objectReference: {fileID: 0}
     - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
       propertyPath: dialogues.Array.data[0].dialogue.Array.data[1]
-      value: 'Ref: OMG, you''re finally awakening! But it seems you can''t understand
-        me. Let me activate the translator on your robotic skeleton.'
+      value: 'Ref: OMG, you''re finally awakening!<br>But it seems you can''t understand
+        me. <br>Let me activate the translator on your robotic skeleton.'
       objectReference: {fileID: 0}
     - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
       propertyPath: dialogues.Array.data[0].dialogue.Array.data[2]
-      value: 'Cat: Where am I? What happened?'
+      value: 'Cat: nya? nya?'
       objectReference: {fileID: 0}
     - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
       propertyPath: dialogues.Array.data[0].dialogue.Array.data[3]
       value: 'Ref: I really don''t know either, but it appears you''re the sole living
-        being left on this station. You''re our only hope to prevent an impending
+        being left on this station. <br>You''re our only hope to prevent an impending
         catastrophe!'
       objectReference: {fileID: 0}
     - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
       propertyPath: dialogues.Array.data[0].dialogue.Array.data[4]
-      value: ' Cat: Catastrophe?'
+      value: ' Cat:nya?'
       objectReference: {fileID: 0}
     - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
       propertyPath: dialogues.Array.data[0].dialogue.Array.data[5]
-      value: 'Ref: Yes, a catastrophe. We''ve been under mysterious attacks, and
-        the nuclear reactor of the station is on the brink of meltdown. You must
-        make your way to the reactor room to manually shut it down.'
+      value: 'Ref: Yes, a catastrophe.<br> We''ve been under mysterious attacks,
+        <br>and the nuclear reactor of the station is on the brink of meltdown.<br>
+        You must make your way to the reactor room to manually shut it down.'
       objectReference: {fileID: 0}
     - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
       propertyPath: dialogues.Array.data[0].dialogue.Array.data[6]
-      value: 'Cat: Why manual shutdown?'
+      value: 'Cat: nya~ nya?'
       objectReference: {fileID: 0}
     - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
       propertyPath: dialogues.Array.data[0].dialogue.Array.data[7]
-      value: 'Ref: All the machinery here is offline. By the way, I''m the artificial
-        intelligence of this station. You can call me "???". This refrigerator is
-        the only connection I have.'
+      value: 'Ref: All the machinery here is offline.<br> By the way, I''m the artificial
+        intelligence of this station. <br>You can call me "???". This refrigerator
+        is the only connection I have.'
       objectReference: {fileID: 0}
     - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
       propertyPath: dialogues.Array.data[0].dialogue.Array.data[8]
-      value: 'Cat: Okay, what''s my next move?'
+      value: 'Cat: nya.... nya?'
       objectReference: {fileID: 0}
     - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
       propertyPath: dialogues.Array.data[0].dialogue.Array.data[9]
-      value: 'Ref: In each room, there''s a quantum singularity generator. You must
-        deactivate it before time runs out.'
+      value: 'Ref: In each room, there''s a quantum singularity generator. <br>You
+        must deactivate it before time runs out.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
+      propertyPath: dialogues.Array.data[1].dialogue.Array.data[0]
+      value: Ref:Time is valuable, better not waste it here
+      objectReference: {fileID: 0}
+    - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
+      propertyPath: dialogues.Array.data[1].dialogue.Array.data[1]
+      value: Ref:Time is valuable, better not waste it here
       objectReference: {fileID: 0}
     - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
       propertyPath: dialogues.Array.data[0].dialogue.Array.data[10]
-      value: 'Ref: However, numerous obstacles stand in your way. You can''t do it
-        alone, which means you''ll have to journey into the past and cooperate with
-        your past selves.'
+      value: 'Ref: However, numerous obstacles stand in your way. <br>You can''t
+        do it alone, which means you''ll have to journey into the past and cooperate
+        with your past selves.'
       objectReference: {fileID: 0}
     - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
       propertyPath: dialogues.Array.data[0].dialogue.Array.data[11]
-      value: 'Ref: Time travel is limited, so be cautious. Once the battery runs
-        out, there''s no turning back. Every move you make must pave the path to
-        your final chance!'
+      value: 'Ref: Time travel is limited, so be cautious. <br>Once the battery runs
+        out,<br> there''s no turning back. <br>Every move you make must pave the
+        path to your final chance!'
       objectReference: {fileID: 0}
     - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
       propertyPath: dialogues.Array.data[0].dialogue.Array.data[12]
