@@ -20,7 +20,8 @@ public class GameController : MonoBehaviour
 
     //TOD: Replace GameObject Class with actual class
     [Header("GameObjects")]
-
+    public List<Vector3> boxPositions;
+    public List<GameObject> boxs;
     public PlayerController CurrentActivePlayer;
     public List<PlayerController> Player_Live;
     public GoalDevice Goal;
@@ -89,10 +90,20 @@ public class GameController : MonoBehaviour
         remainingRewindCount--;
         //death animation then Convert to Phantom
         remainingActionCount = maxActionCount;
+        ResetWalls();
         CurrentActivePlayer.ConvertToPhantom();
         ResetAllPhantom();
         GetNextPlayer();
         
+      }
+    }
+
+    public void ResetWalls()
+    {
+      for(int i=0; i<boxs.Count; i++)
+      {
+        Debug.Log("reset"+boxs[i]);
+        boxs[i].transform.position = boxPositions[i];
       }
     }
 
