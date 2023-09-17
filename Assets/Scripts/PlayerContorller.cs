@@ -162,9 +162,6 @@ public class PlayerController : MonoBehaviour
       if (hit1.collider.CompareTag("Wall")) return false;
 
       if (hit1.collider.CompareTag("WinCheckerbox")) return true;
-      
-
-      
       if(hit1.collider.CompareTag("Player")) return true;
 
       if(hit1.collider.CompareTag("MovableBox")){
@@ -183,11 +180,21 @@ public class PlayerController : MonoBehaviour
         Debug.Log(hit2.collider.name);
         if(hit2.collider.CompareTag("Player")){
           Debug.Log("Box hit [Player]");
+
           Kick(hit1, direction);
           if(playerState != State.Phantom)
           {recordedActions.Add((nextPos - transform.position).normalized);}
           else {ReplayIndex++;}
-        }else{
+        }
+        else if(hit2.collider.CompareTag("WinCheckerbox"))
+        {
+          Kick(hit1, direction);
+          if (playerState != State.Phantom)
+          { recordedActions.Add((nextPos - transform.position).normalized); }
+          else { ReplayIndex++; }
+        }
+        
+        else{
           return false;
         }
       }

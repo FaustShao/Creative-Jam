@@ -260,6 +260,63 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!1001 &557744041
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1982945936934567133, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
+      propertyPath: m_Name
+      value: WinCheckerBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
 --- !u!1 &566136453
 GameObject:
   m_ObjectHideFlags: 0
@@ -5150,6 +5207,7 @@ MonoBehaviour:
   playerGenerationCounter: 0
   remainingRewindCount: 0
   isSolved: 0
+  ActiveFailCheck: 0
   Menu: {fileID: 0}
   Endpoint: {fileID: 0}
   boxPositions: []
@@ -5848,3 +5906,4 @@ SceneRoots:
   - {fileID: 1288692551}
   - {fileID: 1552735800}
   - {fileID: 1461299086}
+  - {fileID: 557744041}
