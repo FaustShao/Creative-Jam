@@ -22,7 +22,8 @@ public class PlayerController : MonoBehaviour
   bool canMove;
 
   public enum State {Idle, Moving, Dead, Phantom, PhantomMove};
-  public bool isInDialogue;
+  public static bool isInDialogue;
+  public static bool isInDialogueTrigger;
 
   public State playerState;
   public List<Vector3> recordedActions;
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour
 
   void FixedUpdate()
   {
+    
     MoveToNextPos();
     ReplayMoveToPos();
   }
@@ -73,13 +75,18 @@ public class PlayerController : MonoBehaviour
 
   void Update()
   {
+    if(isInDialogue) return;
     if(playerState == State.Idle && game.playerAllSettle()){
       //.Log("shabi");
       GetNextPos();
     }
     if(playerState == State.Phantom){
+
       if (Input.anyKeyDown){
-        palyNextStep();
+        if(!Input.GetKey(KeyCode.F)){
+          palyNextStep();
+        }
+        
       }
     }
   }
@@ -138,7 +145,7 @@ public class PlayerController : MonoBehaviour
       
       if (hit1.collider.CompareTag("Wall")) return false;
       
-      
+
       
       if(hit1.collider.CompareTag("Player")) return true;
 

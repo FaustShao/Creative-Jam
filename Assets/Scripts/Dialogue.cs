@@ -28,7 +28,8 @@ public class Dialogue : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {  
+        
         if(Input.GetMouseButtonDown(0)){
             if(textComponent.text == lines[index])
             {
@@ -41,6 +42,7 @@ public class Dialogue : MonoBehaviour
     }
 
     void StartDialog(PlayerController player ){
+        //Time.timeScale = 0;
         index = 0;
         triggeredPlayer = player;
         StartCoroutine(TypeLine());
@@ -92,7 +94,7 @@ public class Dialogue : MonoBehaviour
         isInDialogue = false;
 
         if(triggeredPlayer != null){
-            triggeredPlayer.isInDialogue = false;
+            PlayerController.isInDialogue = false;
             triggeredPlayer = null;
         }
 

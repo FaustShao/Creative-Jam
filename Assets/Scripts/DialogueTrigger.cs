@@ -36,14 +36,23 @@ public class DialogueTrigger : MonoBehaviour
     {
         
     }
-
+    void OnTriggerEnter2D(Collider2D other){
+        PlayerController Player = other.gameObject.GetComponent<PlayerController>();
+        if(Player.playerState != PlayerController.State.Idle ) return;
+        PlayerController.isInDialogueTrigger = true;
+    }
+    void OnTriggerExit2D(Collider2D other){
+        PlayerController Player = other.gameObject.GetComponent<PlayerController>();
+        if(Player.playerState != PlayerController.State.Idle ) return;
+        PlayerController.isInDialogueTrigger = false;
+    }
     void OnTriggerStay2D(Collider2D other)
     {   
         
         PlayerController Player = other.gameObject.GetComponent<PlayerController>();
-        //
+        if(Player.playerState != PlayerController.State.Idle ) return;
         Debug.Log(other.gameObject.CompareTag("Player"));
-        Player.isInDialogue = dialogue.isInDialogue;
+        PlayerController.isInDialogue = dialogue.isInDialogue;
         if(Input.GetKeyDown(InteractionKeyBind) && !dialogue.isInDialogue){
             
             if(index <= dialogues.Length - 1){

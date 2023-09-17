@@ -172,16 +172,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25b6575d678b01d449b76950ee501823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 3
   gridSize: 1.28
-  isInDialogue: 0
-  playerGeneration: 0
+  game: {fileID: 0}
   animator: {fileID: 3697773827890753834}
-  playerActionsList: []
-  isInReplay: 0
-  gameController: {fileID: 0}
-  exhausted: 1
-  remain: 0
+  nextPos: {x: 0, y: 0, z: 0}
+  pastPositions: []
+  ReplayIndex: 0
+  isInDialogue: 0
+  playerState: 0
+  recordedActions: []
 --- !u!95 &3697773827890753834
 Animator:
   serializedVersion: 5
