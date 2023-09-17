@@ -1039,6 +1039,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1315108187}
     - target: {fileID: 4275741683722974560, guid: e97aa9302434ff14b8ad2c25f03e765a, type: 3}
+      propertyPath: gridSize
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4275741683722974560, guid: e97aa9302434ff14b8ad2c25f03e765a, type: 3}
       propertyPath: gameController
       value: 
       objectReference: {fileID: 1315108187}
