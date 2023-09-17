@@ -78,6 +78,7 @@ public class GameController : MonoBehaviour
     }
 
     void CheckRewindAcitivateWarining(){
+      if(LowLifeWarning == null) return;
       if(remainingRewindCount == 1){
         LowLifeWarning.ForceTrigger();
       }

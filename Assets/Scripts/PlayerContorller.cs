@@ -84,6 +84,7 @@ public class PlayerController : MonoBehaviour
   void Update()
   {
     if(isInDialogue) return;
+    
     if(playerState == State.Idle && game.playerAllSettle()){
       //.Log("shabi");
       GetNextPos();
