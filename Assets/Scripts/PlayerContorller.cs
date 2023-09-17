@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
     
     if(ReplayIndex >= recordedActions.Count) return;
     Vector3 direction = recordedActions[ReplayIndex];
-    nextPos = transform.position + direction;
+    nextPos = transform.position + direction * gridSize;
 
     Debug.Log(nextPos);
     if(CheckNextPos()){
@@ -98,13 +98,13 @@ public class PlayerController : MonoBehaviour
   }
   void GetNextPos(){
     if(Input.GetKeyDown(KeyCode.W)){
-      nextPos = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z);
+      nextPos = new Vector3(transform.position.x, transform.position.y + gridSize, transform.position.z);
     }else if(Input.GetKeyDown(KeyCode.S)){
-      nextPos = new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z);
+      nextPos = new Vector3(transform.position.x, transform.position.y - gridSize, transform.position.z);
     }else if(Input.GetKeyDown(KeyCode.A)){
-      nextPos = new Vector3(transform.position.x - 1f, transform.position.y , transform.position.z);
+      nextPos = new Vector3(transform.position.x - gridSize, transform.position.y , transform.position.z);
     }else if(Input.GetKeyDown(KeyCode.D)){
-      nextPos = new Vector3(transform.position.x + 1f, transform.position.y, transform.position.z);
+      nextPos = new Vector3(transform.position.x + gridSize, transform.position.y, transform.position.z);
     }else{
       return;
     }
