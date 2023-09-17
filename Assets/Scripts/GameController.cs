@@ -189,7 +189,9 @@ public class GameController : MonoBehaviour
     }
      public void WinGame(){
         //TODO: add Game Win Event ;
-
+        if(nextScene != null){
+          SceneManager.LoadScene(nextScene);
+        }
         Debug.Log("TODO: Activate Win Game Effect");
      }
 
