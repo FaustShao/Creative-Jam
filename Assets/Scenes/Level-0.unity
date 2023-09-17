@@ -729,9 +729,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
       propertyPath: dialogues.Array.data[0].dialogue.Array.data[3]
-      value: 'Ref: I really don''t know either, but it appears you''re the sole living
-        being left on this station. <br>You''re our only hope to prevent an impending
-        catastrophe!'
+      value: 'Ref: I really don''t know either, but it appears you''re the sole <br>
+        living being left on this station. You''re our only hope to prevent <br>
+        an impending catastrophe!'
       objectReference: {fileID: 0}
     - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
       propertyPath: dialogues.Array.data[0].dialogue.Array.data[4]
@@ -773,7 +773,7 @@ PrefabInstance:
     - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
       propertyPath: dialogues.Array.data[0].dialogue.Array.data[10]
       value: 'Ref: However, numerous obstacles stand in your way. <br>You can''t
-        do it alone, which means you''ll have to journey into the past and cooperate
+        do it alone, which means you''ll have to journey into the<br> past and cooperate
         with your past selves.'
       objectReference: {fileID: 0}
     - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
@@ -784,7 +784,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
       propertyPath: dialogues.Array.data[0].dialogue.Array.data[12]
-      value: 'Ref: But remember, if you make contact with your past self...'
+      value: 'Ref: But remember, <br>if you make contact with your past self...'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
