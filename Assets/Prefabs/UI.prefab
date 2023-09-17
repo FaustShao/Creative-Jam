@@ -137,7 +137,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -30}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1195829012441381320
@@ -633,7 +633,7 @@ RectTransform:
   m_GameObject: {fileID: 5322701184825756863}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5788293173304984560}
@@ -708,7 +708,7 @@ RectTransform:
   m_GameObject: {fileID: 5881719032789701813}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5788293173304984560}
@@ -942,7 +942,7 @@ RectTransform:
   m_GameObject: {fileID: 6962776180925621638}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5788293173304984560}
@@ -1201,6 +1201,18 @@ PrefabInstance:
     - target: {fileID: 3735727396788363853, guid: de95971a1ccd6b84b813e929f9bf332e, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3812175544148449539, guid: de95971a1ccd6b84b813e929f9bf332e, type: 3}
+      propertyPath: m_Color.b
+      value: 0.9450981
+      objectReference: {fileID: 0}
+    - target: {fileID: 3812175544148449539, guid: de95971a1ccd6b84b813e929f9bf332e, type: 3}
+      propertyPath: m_Color.g
+      value: 0.9568628
+      objectReference: {fileID: 0}
+    - target: {fileID: 3812175544148449539, guid: de95971a1ccd6b84b813e929f9bf332e, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9725491
       objectReference: {fileID: 0}
     - target: {fileID: 4759301349967138510, guid: de95971a1ccd6b84b813e929f9bf332e, type: 3}
       propertyPath: Menu

@@ -26,12 +26,18 @@ public class Locks : MonoBehaviour
     
 
     void OnTriggerEnter2D(Collider2D other){
-        isUnlocked = true;
+        if(other.CompareTag("Player") || other.CompareTag("MovableBox")){
+            isUnlocked = true;
+        }
+        
     }
 
 
     void OnTriggerExit2D(Collider2D other){
-        isUnlocked = false;
+        if(other.CompareTag("Player") || other.CompareTag("MovableBox")){
+            Debug.Log("Not LOcked");
+            isUnlocked = false;
+        }
     }
 
 

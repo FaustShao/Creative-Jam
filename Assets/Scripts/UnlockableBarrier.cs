@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class UnlockableBarrier : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -31,9 +32,17 @@ public class UnlockableBarrier : MonoBehaviour
         if(Unlocked){
             Debug.Log("Unlocked Door");
             GetComponent<BoxCollider2D> ().enabled = false;
+            GetComponent<SpriteRenderer>().enabled = false;
+            
+            
         }else{
             GetComponent<BoxCollider2D> ().enabled = true;
+            GetComponent<SpriteRenderer>().enabled = true;
+
+
         }
+
+        
 
     }
 
