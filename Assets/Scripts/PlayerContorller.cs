@@ -162,7 +162,7 @@ public class PlayerController : MonoBehaviour
       if (hit1.collider.CompareTag("Wall")) return false;
 
       if (hit1.collider.CompareTag("WinCheckerbox")) return true;
-      if(hit1.collider.CompareTag("Player")) return true;
+      if(hit1.collider.CompareTag("Player") || hit1.collider.CompareTag("Key")) return true;
 
       if(hit1.collider.CompareTag("MovableBox")){
         Debug.Log("Box In Way");

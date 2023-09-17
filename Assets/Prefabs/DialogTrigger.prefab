@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7319261143758873776}
   m_Layer: 0
   m_Name: DialogTrigger
-  m_TagString: Untagged
+  m_TagString: Key
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,6 +93,7 @@ MonoBehaviour:
   InteractionKeyBind: 102
   RepeatingIndex: 0
   dialogue: {fileID: 0}
+  isOnActive: 0
   dialogues:
   - dialogue:
     - Testing Dialogue 1

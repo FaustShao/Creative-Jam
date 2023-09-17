@@ -198,6 +198,7 @@ public class GameController : MonoBehaviour
     void CheckPause(){
         if(Input.GetKeyDown(KeyCode.Escape)){
             Menu.isActiveOnStart = true;
+            Menu.gameObject.SetActive(true);
             Time.timeScale = 0;
         }
     }
