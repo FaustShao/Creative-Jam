@@ -107,9 +107,13 @@ public class PlayerController : MonoBehaviour
       nextPos = new Vector3(transform.position.x, transform.position.y - gridSize, transform.position.z);
     }else if(Input.GetKeyDown(KeyCode.A)){
       nextPos = new Vector3(transform.position.x - gridSize, transform.position.y , transform.position.z);
-    }else if(Input.GetKeyDown(KeyCode.D)){
+      transform.localScale = new Vector3(-1, 1, 1);
+    }
+    else if(Input.GetKeyDown(KeyCode.D)){
       nextPos = new Vector3(transform.position.x + gridSize, transform.position.y, transform.position.z);
-    }else{
+      transform.localScale = new Vector3(1, 1, 1);
+    }
+    else{
       return;
     }
 
@@ -130,6 +134,7 @@ public class PlayerController : MonoBehaviour
       Debug.Log(hit.collider.gameObject);
 
       if(hit.collider.CompareTag("Player")) return true;
+      if (hit.collider.CompareTag("Wall")) return false;
       Kick(hit, direction);
       return false;
     }else{
