@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -7,7 +9,7 @@ public class PlayerController : MonoBehaviour
   public float moveSpeed = 1f;
   public float gridSize = 1f;
   public GameController game;
-
+  public Animator animator;
 
 
   Vector3 respawnPoint;
@@ -43,7 +45,9 @@ public class PlayerController : MonoBehaviour
       if(transform.position != nextPos){
         transform.position = Vector3.MoveTowards(transform.position, nextPos, moveSpeed * Time.deltaTime);
       }else{
+        animator.SetBool("isMoving", false);
         playerState = State.Idle;
+        
         game.DecreaseActionCount();
         
       }
@@ -111,6 +115,7 @@ public class PlayerController : MonoBehaviour
 
 
     if(CheckNextPos()){
+      animator.SetBool("isMoving", true);
       playerState = State.Moving;
       recordedActions.Add((nextPos - transform.position).normalized);
     }
@@ -125,19 +130,39 @@ public class PlayerController : MonoBehaviour
       Debug.Log(hit.collider.gameObject);
 
       if(hit.collider.CompareTag("Player")) return true;
-      Kick();
+      Kick(hit, direction);
       return false;
     }else{
       return true;
     }
 
   }
-  
 
-  void Kick(){
 
+  void Kick(RaycastHit2D hit, Vector3 direction)
+  {
+    animator.SetBool("isKicking", true);
+    StartCoroutine(MoveBoxOverTime(hit.collider.transform, direction));
   }
-  
+
+  IEnumerator MoveBoxOverTime(Transform boxTransform, Vector3 direction)
+  {
+    Vector3 startPosition = boxTransform.position;
+    Vector3 endPosition = startPosition + direction * gridSize;
+    float time = 0f;
+    float duration = 0.5f; // Adjust this value to control the speed of the movement
+
+    while (time < duration)
+    {
+      time += Time.deltaTime;
+      boxTransform.position = Vector3.Lerp(startPosition, endPosition, time / duration);
+      yield return null;
+    }
+
+    boxTransform.position = endPosition;
+    animator.SetBool("isKicking", false);
+  }
+
   void NextAction(){
 
   }

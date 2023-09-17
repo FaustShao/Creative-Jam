@@ -87,6 +87,7 @@ public class GameController : MonoBehaviour
 
       if(remainingActionCount == 0){
         remainingRewindCount--;
+        //death animation then Convert to Phantom
         remainingActionCount = maxActionCount;
         CurrentActivePlayer.ConvertToPhantom();
         ResetAllPhantom();

@@ -512,7 +512,7 @@ GameObject:
   - component: {fileID: 1088929120}
   - component: {fileID: 1088929119}
   m_Layer: 0
-  m_Name: endpoint
+  m_Name: Endpoint
   m_TagString: Endpoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5152,14 +5152,12 @@ MonoBehaviour:
   isSolved: 0
   Menu: {fileID: 0}
   CurrentActivePlayer: {fileID: 0}
-  Player_Lives: []
+  Player_Live: []
   Goal: {fileID: 0}
   Walls: []
   Turrets: []
   Door: {fileID: 0}
   DoorTrigger: {fileID: 0}
-  playerPrefab: {fileID: 228307903073938990, guid: 64cbfaee673c0064c93088aac21ca4ca, type: 3}
-  level1Object: {fileID: 0}
 --- !u!4 &1552735800
 Transform:
   m_ObjectHideFlags: 0
