@@ -39,7 +39,15 @@ public class PlayerController : MonoBehaviour
     ReplayMoveToPos();
   }
 
-  
+  void OnTriggerEnter2D(Collider2D other)
+  {
+    if (other.gameObject.CompareTag("WinCheckerbox"))
+    {
+      game.WinGame();
+    }
+  }
+
+
   void MoveToNextPos(){
     if(playerState == State.Moving){
       if(transform.position != nextPos){
@@ -91,6 +99,14 @@ public class PlayerController : MonoBehaviour
     
     if(ReplayIndex >= recordedActions.Count) return;
     Vector3 direction = recordedActions[ReplayIndex];
+    if (direction.x > 0)
+    {
+      transform.localScale = new Vector3(1, 1, 1);  // Facing right
+    }
+    else if (direction.x < 0)
+    {
+      transform.localScale = new Vector3(-1, 1, 1);  // Facing left
+    }
     nextPos = transform.position + direction * gridSize;
 
     Debug.Log(nextPos);
@@ -125,6 +141,8 @@ public class PlayerController : MonoBehaviour
     }
   }
 
+
+ 
   bool CheckNextPos(){
     Vector3 direction = (nextPos - gameObject.transform.position).normalized;
 
@@ -135,7 +153,7 @@ public class PlayerController : MonoBehaviour
 
       
       if (hit1.collider.CompareTag("Wall")) return false;
-      
+      if (hit1.collider.CompareTag("WinCheckerbox")) return true;
       
       
       if(hit1.collider.CompareTag("Player")) return true;
@@ -148,14 +166,18 @@ public class PlayerController : MonoBehaviour
         if(hit2.collider == null) {
           Debug.Log("Success");
           Kick(hit1, direction);
-          recordedActions.Add((nextPos - transform.position).normalized);
+          if(playerState != State.Phantom)
+          {recordedActions.Add((nextPos - transform.position).normalized);}
+          else {ReplayIndex++;}
           return false;
         }
         Debug.Log(hit2.collider.name);
         if(hit2.collider.CompareTag("Player")){
           Debug.Log("Box hit [Player]");
           Kick(hit1, direction);
-          recordedActions.Add((nextPos - transform.position).normalized);
+          if(playerState != State.Phantom)
+          {recordedActions.Add((nextPos - transform.position).normalized);}
+          else {ReplayIndex++;}
         }else{
           return false;
         }
@@ -190,6 +212,10 @@ public class PlayerController : MonoBehaviour
 
     boxTransform.position = endPosition;
     animator.SetBool("isKicking", false);
+    if(playerState != State.Phantom){
+      game.DecreaseActionCount();
+    }
+    
   }
 
   void NextAction(){
@@ -215,7 +241,10 @@ public class PlayerController : MonoBehaviour
 
 
   public void ResetPhantom(){
-    if(playerState != State.Phantom) return;
+    if(playerState != State.Phantom && playerState != State.PhantomMove) {
+      Debug.Log(playerState);
+      return;
+    }
     ConvertToPhantom();
     ReplayIndex = 0;
     palyNextStep();

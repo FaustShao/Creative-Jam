@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour
     public int playerGenerationCounter = 0;
     public int remainingRewindCount;
     public bool isSolved;
-
+    public bool ActiveFailCheck;
     public MenuController Menu;
 
     //TOD: Replace GameObject Class with actual class
@@ -40,6 +40,9 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+
+      ActiveFailCheck = false;
+
       isSolved = false;
       remainingActionCount = maxActionCount;
       remainingRewindCount = maxRewindCount;
@@ -65,6 +68,7 @@ public class GameController : MonoBehaviour
     void Update()
     {
       CheckPause();
+      CheckCollideFailStatus();
       if(isPause){
         CheckFinishedReplay();
       }
@@ -128,12 +132,33 @@ public class GameController : MonoBehaviour
     }
 
 
-    
+     void CheckCollideFailStatus(){
+      if(!ActiveFailCheck){
+        return;
+      }
+      foreach(PlayerController p in Player_Live){
+        if(CurrentActivePlayer == p) {
+          Debug.Log("SameActivePlayer");
+        }
+        if(p.playerState == PlayerController.State.PhantomMove){ 
+
+          if((CurrentActivePlayer.transform.position - p.transform.position ).magnitude <= 0.1f){
+            FailGame();
+          }
+          
+        }
+      }
+    }
 
     void ResetAllPhantom(){
+      ActiveFailCheck = false;
       foreach ( PlayerController p in Player_Live){
         p.ResetPhantom();
       }
+      Invoke(nameof(SetToActiveFailCheck),0.2f);
+    }
+    void SetToActiveFailCheck(){
+      ActiveFailCheck = true;
     }
     public void GetNextPlayer(){
       playerIndex++;
@@ -147,7 +172,7 @@ public class GameController : MonoBehaviour
 
     public void FailGame(){
         //TODO: add Game Fail ;
-
+        Debug.Log("GameFail");
         //reload Current Scene;
         Scene scene = SceneManager.GetActiveScene(); 
         SceneManager.LoadScene(scene.name);
