@@ -172,6 +172,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4275741683722974560, guid: e97aa9302434ff14b8ad2c25f03e765a, type: 3}
+      propertyPath: game
+      value: 
+      objectReference: {fileID: 1315108187}
+    - target: {fileID: 4275741683722974560, guid: e97aa9302434ff14b8ad2c25f03e765a, type: 3}
       propertyPath: gameController
       value: 
       objectReference: {fileID: 1315108187}
@@ -624,6 +628,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4275741683722974560, guid: e97aa9302434ff14b8ad2c25f03e765a, type: 3}
+      propertyPath: game
+      value: 
+      objectReference: {fileID: 1315108187}
+    - target: {fileID: 4275741683722974560, guid: e97aa9302434ff14b8ad2c25f03e765a, type: 3}
       propertyPath: gameController
       value: 
       objectReference: {fileID: 1315108187}
@@ -811,9 +819,9 @@ MonoBehaviour:
   maxRewindCount: 3
   sceneName: 
   spawnPoint: {x: 0, y: 0}
-  remainingActionCount: 0
+  remainingActionCount: 3
   playerGenerationCounter: 0
-  remainingRewindCount: 0
+  remainingRewindCount: 3
   isSolved: 0
   Menu: {fileID: 0}
   CurrentActivePlayer: {fileID: 0}
@@ -1026,6 +1034,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4275741683722974560, guid: e97aa9302434ff14b8ad2c25f03e765a, type: 3}
+      propertyPath: game
+      value: 
+      objectReference: {fileID: 1315108187}
     - target: {fileID: 4275741683722974560, guid: e97aa9302434ff14b8ad2c25f03e765a, type: 3}
       propertyPath: gameController
       value: 
