@@ -479,7 +479,7 @@ PrefabInstance:
       objectReference: {fileID: 325618291}
     - target: {fileID: 8708324036764893930, guid: 91abcbc1711070d4a8f219e089965cbb, type: 3}
       propertyPath: nextScene
-      value: Assets/Scenes/Level-1.unity
+      value: Assets/Scenes/Level-0.unity
       objectReference: {fileID: 0}
     - target: {fileID: 8708324036764893930, guid: 91abcbc1711070d4a8f219e089965cbb, type: 3}
       propertyPath: playerPrefab

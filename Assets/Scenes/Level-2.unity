@@ -372,11 +372,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.92
+      value: 2.31
       objectReference: {fileID: 0}
     - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.93
+      value: 1.88
       objectReference: {fileID: 0}
     - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
       propertyPath: m_LocalPosition.z
@@ -883,11 +883,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.62
+      value: 3.4
       objectReference: {fileID: 0}
     - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.63
+      value: 2.04
       objectReference: {fileID: 0}
     - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1688,8 +1688,20 @@ PrefabInstance:
       value: WinCheckerBox
       objectReference: {fileID: 0}
     - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.467656
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.467656
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.58457
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.69
+      value: -0.61
       objectReference: {fileID: 0}
     - target: {fileID: 9151195940683687726, guid: fc81a6f0254459b45bba5e5391a47230, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5374,7 +5386,7 @@ MonoBehaviour:
   maxActionCount: 7
   nextScene: 
   maxRewindCount: 3
-  sceneName: 
+  sceneName: Assets/Scenes/StartingScene.unity
   spawnPoint: {x: 0, y: 0}
   remainingActionCount: 0
   playerGenerationCounter: 0
@@ -5568,7 +5580,7 @@ PrefabInstance:
       objectReference: {fileID: 1260743675}
     - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
       propertyPath: isOnActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
       propertyPath: icons.Array.data[0].icon.Array.data[0]
