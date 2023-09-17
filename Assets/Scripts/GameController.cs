@@ -52,6 +52,14 @@ public class GameController : MonoBehaviour
       }
     }
 
+
+    public bool playerAllSettle(){
+      
+      foreach(PlayerController p in Player_Live){
+        if (p.isMoving()) return false;
+      }
+      return true;
+    }
     // Update is called once per frame
     void Update()
     {

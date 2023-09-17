@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
   Vector3 respawnPoint;
   public Vector3 nextPos;
 
+
+  
   public List<Vector3> pastPositions;
   public int ReplayIndex;
   bool canMove;
@@ -67,7 +69,7 @@ public class PlayerController : MonoBehaviour
 
   void Update()
   {
-    if(playerState == State.Idle){
+    if(playerState == State.Idle && game.playerAllSettle()){
       //.Log("shabi");
       GetNextPos();
     }
@@ -165,4 +167,8 @@ public class PlayerController : MonoBehaviour
     palyNextStep();
   }
 
+
+  public bool isMoving(){
+    return (playerState == State.PhantomMove && ReplayIndex < 1);
+  }
 }
