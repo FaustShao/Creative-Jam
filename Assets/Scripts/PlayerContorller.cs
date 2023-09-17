@@ -99,6 +99,14 @@ public class PlayerController : MonoBehaviour
     
     if(ReplayIndex >= recordedActions.Count) return;
     Vector3 direction = recordedActions[ReplayIndex];
+    if (direction.x > 0)
+    {
+      transform.localScale = new Vector3(1, 1, 1);  // Facing right
+    }
+    else if (direction.x < 0)
+    {
+      transform.localScale = new Vector3(-1, 1, 1);  // Facing left
+    }
     nextPos = transform.position + direction * gridSize;
 
     Debug.Log(nextPos);
