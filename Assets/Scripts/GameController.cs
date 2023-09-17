@@ -35,56 +35,36 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-      //maxActionCount = 6;
-      //maxRewindCount = 2;
-      // Set the initial game state
+
       isSolved = false;
       remainingActionCount = maxActionCount;
       remainingRewindCount = maxRewindCount;
-      // Instantiate the first player at the spawn point and set it as the current active player
-      //GameObject newPlayer = Instantiate(playerPrefab, new Vector3(spawnPoint.x, spawnPoint.y, 0), Quaternion.identity);
-      //CurrentActivePlayer = newPlayer;
-      //Player_Lives.Add(newPlayer);
+ 
 
       CurrentActivePlayer = Player_Live[maxRewindCount - remainingRewindCount];
+      CurrentActivePlayer.isAvailable = true;
 
-      Debug.Log( Player_Live[0]);
-
-      // Link the new player to this game controller
-      //newPlayer.GetComponent<PlayerController>().gameController = this;
+      for(int i = 0; i < Player_Live.Count; i++){
+        if(i != (maxRewindCount - remainingRewindCount)){
+          Player_Live[i].respawnPoint = Player_Live[i].transform.position;
+          Player_Live[i].isAvailable = false;
+          Player_Live[i].gameObject.SetActive(false);
+        }
+      }
     }
 
     // Update is called once per frame
     void Update()
     {
-      //HandleExhaustedPlayer();
       CheckPause();
     }
 
     public void ProceedGame()
     {
-      //remainingActionCount = CurrentActivePlayer.GetComponent<PlayerController>().remain;
-      Debug.Log("remainActionCount" + remainingActionCount);
-      ReplayAllAvailable();
+      ResetAllUnAvailable();
       remainingActionCount--;
 
       CheckEndOfRewind();
-
-
-      /*
-      foreach (GameObject player in Player_Lives)
-      {
-        if(player.GetComponent<PlayerController>().remain == maxActionCount)
-        {
-          player.GetComponent<PlayerController>().ResetToRespawnPoint();
-        }
-        // Move each player according to their recorded action
-        if (player.GetComponent<PlayerController>().playerGeneration < playerGenerationCounter)
-        {
-          player.GetComponent<PlayerController>().PlayStep(maxActionCount - remainingActionCount);
-        }
-      }
-      */
     }
 
 
@@ -104,43 +84,40 @@ public class GameController : MonoBehaviour
      }
 
     public void CheckEndOfRewind(){
-      
       if(remainingActionCount == 0){
-        
+        CurrentActivePlayer.isAvailable = false;
+        CurrentActivePlayer.exhausted = true;
         remainingActionCount = maxActionCount;
-        CurrentActivePlayer.SoftReset(spawnPoint);
-        ReplayAllAvailable();
         remainingRewindCount--;
-
-        CurrentActivePlayer = Player_Live[maxRewindCount - remainingRewindCount];
-        
+        if(remainingRewindCount != 0){
+          int newIndex = maxRewindCount - remainingRewindCount;
+          CurrentActivePlayer = Player_Live[newIndex];
+          CurrentActivePlayer.gameObject.SetActive(true);
+          CurrentActivePlayer.isAvailable = true;
+        }else{
+          FailGame();
+        }
       }
     }
 
-    public void ResetAllAvailable(){
-
-      for(int i =0; i < 3; i++){
-        if(Player_Live[i].isInReplay){
-          Player_Live[i].SoftReset(spawnPoint);
+    public void ResetAllUnAvailable(){
+      foreach ( PlayerController p in Player_Live){
+        if(p.exhausted){
+          p.SoftReset();
+          p.isInReplay = true;
+          p.exhausted = false;
         }
       }
-
     }
 
     void CheckPause(){
         if(Input.GetKeyDown(KeyCode.Escape)){
-            Menu.isActiveOnStart = true;
-            Menu.gameObject.SetActive(true);
+            Menu.isActiveOnStart = true；
             Time.timeScale = 0;
         }
     }
 
 
-    void ReplayAllAvailable(){
-      for(int i = 0; i < 3; i++){
-        if(Player_Live[i].isInReplay){
-            Player_Live[i].PlayStep(maxActionCount - remainingActionCount);
-        }
-      }
-    }
+
+    
 }
