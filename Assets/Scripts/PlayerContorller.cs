@@ -128,14 +128,38 @@ public class PlayerController : MonoBehaviour
   bool CheckNextPos(){
     Vector3 direction = (nextPos - gameObject.transform.position).normalized;
 
-    RaycastHit2D hit = Physics2D.Raycast(transform.position + direction/2, direction, 0.5f);
+    RaycastHit2D hit1 = Physics2D.Raycast(transform.position + direction*gridSize*0.7f, direction, 0.3f*gridSize);
 
-    if(hit.collider != null){
-      Debug.Log(hit.collider.gameObject);
+    if(hit1.collider != null){
+      Debug.Log(hit1.collider.gameObject);
 
-      if(hit.collider.CompareTag("Player")) return true;
-      if (hit.collider.CompareTag("Wall")) return false;
-      Kick(hit, direction);
+      
+      if (hit1.collider.CompareTag("Wall")) return false;
+      
+      
+      
+      if(hit1.collider.CompareTag("Player")) return true;
+
+      if(hit1.collider.CompareTag("MovableBox")){
+        Debug.Log("Box In Way");
+        RaycastHit2D hit2 = Physics2D.Raycast(transform.position + direction*gridSize * 1.7f, direction, 0.3f*gridSize);
+
+
+        if(hit2.collider == null) {
+          Debug.Log("Success");
+          Kick(hit1, direction);
+          recordedActions.Add((nextPos - transform.position).normalized);
+          return false;
+        }
+        Debug.Log(hit2.collider.name);
+        if(hit2.collider.CompareTag("Player")){
+          Debug.Log("Box hit [Player]");
+          Kick(hit1, direction);
+          recordedActions.Add((nextPos - transform.position).normalized);
+        }else{
+          return false;
+        }
+      }
       return false;
     }else{
       return true;
