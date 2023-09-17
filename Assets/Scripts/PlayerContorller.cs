@@ -39,7 +39,15 @@ public class PlayerController : MonoBehaviour
     ReplayMoveToPos();
   }
 
-  
+  void OnTriggerEnter2D(Collider2D other)
+  {
+    if (other.gameObject.CompareTag("WinCheckerbox"))
+    {
+      game.WinGame();
+    }
+  }
+
+
   void MoveToNextPos(){
     if(playerState == State.Moving){
       if(transform.position != nextPos){
@@ -137,7 +145,7 @@ public class PlayerController : MonoBehaviour
 
       
       if (hit1.collider.CompareTag("Wall")) return false;
-      
+      if (hit1.collider.CompareTag("WinCheckerbox")) return true;
       
       
       if(hit1.collider.CompareTag("Player")) return true;
