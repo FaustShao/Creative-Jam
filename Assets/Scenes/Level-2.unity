@@ -5036,7 +5036,7 @@ TilemapCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.8}
+  m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
@@ -5151,6 +5151,9 @@ MonoBehaviour:
   remainingRewindCount: 0
   isSolved: 0
   Menu: {fileID: 0}
+  Endpoint: {fileID: 0}
+  boxPositions: []
+  boxs: []
   CurrentActivePlayer: {fileID: 0}
   Player_Live: []
   Goal: {fileID: 0}
