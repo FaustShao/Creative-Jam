@@ -9,6 +9,7 @@ TagManager:
   - block
   - Endpoint
   - Key
+  - WinCheckerbox
   layers:
   - Default
   - TransparentFX
