@@ -46,6 +46,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
       FailSceneController.previouScene = SceneManager.GetActiveScene().buildIndex;
+      FailSceneCollide.lastScene = SceneManager.GetActiveScene().buildIndex;
       ActiveFailCheck = false;
 
       isSolved = false;
@@ -158,13 +159,15 @@ public class GameController : MonoBehaviour
         if(p.playerState == PlayerController.State.PhantomMove){ 
 
           if((CurrentActivePlayer.transform.position - p.transform.position ).magnitude <= 0.1f){
-            FailGame();
+            FailGameCollide();
           }
           
         }
       }
     }
-
+    void FailGameCollide(){
+      SceneManager.LoadScene("Assets/Scenes/FailSceneCollide.unity");
+    }
     public void SetPhantomAnimator()
     {
         CurrentActivePlayer.animator.runtimeAnimatorController = PhantomController;

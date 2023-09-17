@@ -5,13 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
     path: Assets/Scenes/StartingScene.unity
     guid: 12b47f741287fc14ea4632eb349ecf96
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/AranScene.unity
     guid: 6863e5322859d854a9c4a0837e566b23
   - enabled: 1
@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FailScene.unity
     guid: 426385181e36629418aa4f873aa4625a
+  - enabled: 1
+    path: Assets/Scenes/FailSceneCollide.unity
+    guid: 698c661dafb446e4081ea6a42ecb6b9f
   m_configObjects: {}
