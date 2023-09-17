@@ -125,6 +125,8 @@ public class PlayerController : MonoBehaviour
     }
   }
 
+
+ 
   bool CheckNextPos(){
     Vector3 direction = (nextPos - gameObject.transform.position).normalized;
 
@@ -148,14 +150,18 @@ public class PlayerController : MonoBehaviour
         if(hit2.collider == null) {
           Debug.Log("Success");
           Kick(hit1, direction);
-          recordedActions.Add((nextPos - transform.position).normalized);
+          if(playerState != State.Phantom)
+          {recordedActions.Add((nextPos - transform.position).normalized);}
+          else {ReplayIndex++;}
           return false;
         }
         Debug.Log(hit2.collider.name);
         if(hit2.collider.CompareTag("Player")){
           Debug.Log("Box hit [Player]");
           Kick(hit1, direction);
-          recordedActions.Add((nextPos - transform.position).normalized);
+          if(playerState != State.Phantom)
+          {recordedActions.Add((nextPos - transform.position).normalized);}
+          else {ReplayIndex++;}
         }else{
           return false;
         }
@@ -190,6 +196,10 @@ public class PlayerController : MonoBehaviour
 
     boxTransform.position = endPosition;
     animator.SetBool("isKicking", false);
+    if(playerState != State.Phantom){
+      game.DecreaseActionCount();
+    }
+    
   }
 
   void NextAction(){
@@ -215,7 +225,10 @@ public class PlayerController : MonoBehaviour
 
 
   public void ResetPhantom(){
-    if(playerState != State.Phantom) return;
+    if(playerState != State.Phantom && playerState != State.PhantomMove) {
+      Debug.Log(playerState);
+      return;
+    }
     ConvertToPhantom();
     ReplayIndex = 0;
     palyNextStep();

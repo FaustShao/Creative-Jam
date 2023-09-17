@@ -286,6 +286,7 @@ GameObject:
   - component: {fileID: 2687374535163769248}
   - component: {fileID: 8391930664121242920}
   - component: {fileID: 8670926071629676297}
+  - component: {fileID: 3747863554991881791}
   m_Layer: 5
   m_Name: In GameUI
   m_TagString: Untagged
@@ -305,8 +306,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8692424530785983140}
   - {fileID: 5788293173304984560}
+  - {fileID: 8692424530785983140}
   m_Father: {fileID: 3739234419053243570}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -377,6 +378,24 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3747863554991881791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3155531668397319187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81b6e32cb67254243b34871b5af46766, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Game: {fileID: 0}
+  RoundIndicator:
+  - {fileID: 2186131173174863482}
+  - {fileID: 8471467263665551618}
+  - {fileID: 7439604217535625419}
+  ActionsIndicator: {fileID: 0}
 --- !u!1 &3437221035324294804
 GameObject:
   m_ObjectHideFlags: 0
