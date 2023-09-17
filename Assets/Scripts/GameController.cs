@@ -45,7 +45,7 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-
+      FailSceneController.previouScene = SceneManager.GetActiveScene().buildIndex;
       ActiveFailCheck = false;
 
       isSolved = false;
@@ -194,8 +194,9 @@ public class GameController : MonoBehaviour
         //TODO: add Game Fail ;
         Debug.Log("GameFail");
         //reload Current Scene;
-        Scene scene = SceneManager.GetActiveScene(); 
-        SceneManager.LoadScene(scene.name);
+         
+
+        SceneManager.LoadScene("Assets/Scenes/FailScene.unity");
     }
      public void WinGame(){
         //TODO: add Game Win Event ;
