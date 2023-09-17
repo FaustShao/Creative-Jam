@@ -12,6 +12,8 @@ public class DialogueTrigger : MonoBehaviour
     public int RepeatingIndex;
     public Dialogue dialogue;
 
+    public bool isOnActive;
+
     [Serializable]
     public class ConversationList
     {
@@ -25,10 +27,31 @@ public class DialogueTrigger : MonoBehaviour
         public Sprite[] icon;
     }
     public ConversationIconList[] icons;
-    void Start()
+
+
+    private void Awake()
     {
+        StartCoroutine(loadStartDelayed());
+    }
+
+    IEnumerator loadStartDelayed()
+    {
+        yield return new WaitForSeconds(0.1f);
+        if(isOnActive){
+            ForceTrigger();
+            isOnActive = false;
+            
+        }
+        
+    }
+    void Start()
+    {   
         InteractionKeyBind = KeyCode.F;
         index = 0;
+        
+        
+        
+        
     }
 
     // Update is called once per frame
@@ -69,8 +92,8 @@ public class DialogueTrigger : MonoBehaviour
 
     public void ForceTrigger(){
 
-        Time.timeScale = 0;
-        dialogue.DeactivateDialogue();
+        //Time.timeScale = 0;
+        PlayerController.isInDialogue = true;
         PlayerController Player = null;
         if(index <= dialogues.Length - 1){
             dialogue.SetDialogue(dialogues[index].dialogue,icons[index].icon);

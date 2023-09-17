@@ -46,7 +46,6 @@ public class Dialogue : MonoBehaviour
         index = 0;
         triggeredPlayer = player;
         StartCoroutine(TypeLine());
-
     }
 
     IEnumerator TypeLine(){
@@ -82,6 +81,7 @@ public class Dialogue : MonoBehaviour
     }
     
     public void ActivateDialogue(PlayerController player){
+        Debug.Log("Activating Dialogue");
         isInDialogue = true;
         textComponent.text = string.Empty;
         gameObject.SetActive(true);
@@ -94,11 +94,11 @@ public class Dialogue : MonoBehaviour
         isInDialogue = false;
 
         if(triggeredPlayer != null){
-            PlayerController.isInDialogue = false;
+            
             triggeredPlayer = null;
         }
-
-        Time.timeScale = 1;
+        PlayerController.isInDialogue = false;
+        
         
     }
     public void SetDialogue(string[] str, Sprite[] sprites){

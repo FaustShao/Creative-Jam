@@ -31,6 +31,8 @@ public class GameController : MonoBehaviour
     public UnlockableBarrier Door;
     public Locks DoorTrigger;
 
+
+    public DialogueTrigger LowLifeWarning;
     int playerIndex = 0;
     bool isPause;
 
@@ -75,6 +77,13 @@ public class GameController : MonoBehaviour
       CheckWinCondition();
     }
 
+    void CheckRewindAcitivateWarining(){
+      if(remainingRewindCount == 1){
+        LowLifeWarning.ForceTrigger();
+      }
+      
+    }
+
     void CheckWinCondition()
     {
       // Get player's and core object's positions
@@ -112,6 +121,7 @@ public class GameController : MonoBehaviour
 
       if(remainingActionCount == 0){
         remainingRewindCount--;
+        CheckRewindAcitivateWarining();
         //death animation then Convert to Phantom
         remainingActionCount = maxActionCount;
         ResetWalls();

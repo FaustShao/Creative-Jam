@@ -30,14 +30,19 @@ public class UnlockableBarrier : MonoBehaviour
 
         if(Unlocked){
             Debug.Log("Unlocked Door");
+            GetComponent<BoxCollider2D> ().enabled = false;
+        }else{
+            GetComponent<BoxCollider2D> ().enabled = true;
         }
+
     }
+
+
 
     public void SoftReset(){
         foreach (Locks l in controlLocks){
             l.SoftReset();
         }
-
         Unlocked = false;
     }
 }

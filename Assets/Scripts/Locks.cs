@@ -23,15 +23,16 @@ public class Locks : MonoBehaviour
     */
     
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        isUnlocked = true;
-
-    }
-
-    void OnTriggerStay2D(Collider2D other){
-        isUnlocked = true;
-    }
     
+
+    void OnTriggerEnter2D(Collider2D other){
+        isUnlocked = true;
+    }
+
+
+    void OnTriggerExit2D(Collider2D other){
+        isUnlocked = false;
+    }
 
 
     public void ForceDisable(){
