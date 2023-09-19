@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -11,17 +10,14 @@ public class PlayerController : MonoBehaviour
   public GameController game;
   public Animator animator;
 
-
   Vector3 respawnPoint;
   public Vector3 nextPos;
-
-
   
   public List<Vector3> pastPositions;
   public int ReplayIndex;
   bool canMove;
 
-  public enum State {Idle, Moving, Dead, Phantom, PhantomMove};
+  public enum State {Idle, Moving, Dead, Phantom, PhantomMove,winning,next };
   public static bool isInDialogue;
   public static bool isInDialogueTrigger;
 
@@ -36,16 +32,25 @@ public class PlayerController : MonoBehaviour
 
   void FixedUpdate()
   {
-    
     MoveToNextPos();
     ReplayMoveToPos();
   }
 
-  void OnTriggerEnter2D(Collider2D other)
+  void OnTriggerStay2D(Collider2D other)
   {
-    if (other.gameObject.CompareTag("WinCheckerbox"))
+    if (other.gameObject.CompareTag("WinCheckerbox") && playerState != State.next)
     {
-      game.WinGame();
+      playerState = State.winning;
+      animator.SetBool("isSolved", true);
+
+      AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+      if (stateInfo.normalizedTime >= 1)
+      {
+        playerState = State.next;
+        Debug.Log("Animation has ended");
+        game.WinGame();
+      }
     }
   }
 
@@ -72,30 +77,30 @@ public class PlayerController : MonoBehaviour
    
     if(transform.position != nextPos){
         transform.position = Vector3.MoveTowards(transform.position, nextPos, moveSpeed * Time.deltaTime);
-      }else{
-        ReplayIndex++;
-        Debug.Log("Finish 1 Move");
-        playerState = State.Phantom;
-      }
-
+    }else{
+      ReplayIndex++;
+      Debug.Log("Finish 1 Move");
+      playerState = State.Phantom;
+    }
   }
 
 
   void Update()
   {
-    if(isInDialogue) return;
+    
+    if (isInDialogue) return;
     
     if(playerState == State.Idle && game.playerAllSettle()){
       //.Log("shabi");
       GetNextPos();
     }
-    if(playerState == State.Phantom){
+
+    if (playerState == State.Phantom){
 
       if (Input.anyKeyDown){
         if(!Input.GetKey(KeyCode.F)){
-          palyNextStep();
+          playNextStep();
         }
-        
       }
     }
   }
@@ -235,20 +240,8 @@ public class PlayerController : MonoBehaviour
     
   }
 
-  void NextAction(){
-
-  }
-
-
-  void RespawnAsPhantom(){
-    playerState = State.Phantom;
-    
-  }
-
-  public void palyNextStep(){
-    
-    GetNextPastPos();
-    
+  public void playNextStep(){
+    GetNextPastPos();   
   }
 
   public void ConvertToPhantom(){
@@ -264,7 +257,7 @@ public class PlayerController : MonoBehaviour
     }
     ConvertToPhantom();
     ReplayIndex = 0;
-    palyNextStep();
+    playNextStep();
   }
 
 
