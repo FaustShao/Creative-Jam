@@ -109,14 +109,22 @@ public class GameController : MonoBehaviour
         remainingRewindCount--;
         CheckRewindAcitivateWarining();
         //death animation then Convert to Phantom
-        remainingActionCount = maxActionCount;
-        ResetWalls();
-        SetPhantomAnimator();
-        CurrentActivePlayer.ConvertToPhantom();
-        ResetAllPhantom();
-        GetNextPlayer();
-        
+        CurrentActivePlayer.ConvertToDeath();
+        //while(CurrentActivePlayer.playerState != PlayerController.State.Dead)
+        //{
+          //ResetScene();
+        //}
       }
+    }
+
+    public void ResetScene()
+    {
+      remainingActionCount = maxActionCount;
+      ResetWalls();
+      SetPhantomAnimator();
+      CurrentActivePlayer.ConvertToPhantom();
+      ResetAllPhantom();
+      GetNextPlayer();
     }
 
     public void ResetWalls()

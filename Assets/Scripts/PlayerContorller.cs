@@ -237,7 +237,6 @@ public class PlayerController : MonoBehaviour
     if(playerState != State.Phantom){
       game.DecreaseActionCount();
     }
-    
   }
 
   public void playNextStep(){
@@ -249,6 +248,35 @@ public class PlayerController : MonoBehaviour
     playerState = State.Phantom;
   }
 
+  public void ConvertToDeath()
+  {
+    if(playerState == State.Dead) {
+      animator.SetBool("isExhausted", true);
+    }
+
+    StartCoroutine(checkDeathAnimationEnd());
+  }
+
+  public IEnumerator checkDeathAnimationEnd()
+  {
+
+    while (true)
+    {
+      AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+      if (stateInfo.IsName("Death") && stateInfo.normalizedTime >= 1.0f)
+      {
+        Debug.Log("Death animation has ended");
+        animator.SetBool("isExhausted", false);
+        playerState = State.Idle;
+        break;  // Exit the loop once the death animation has ended
+      }
+      yield return null;  // Wait for the next frame before the loop iterates again
+
+
+    }
+    game.ResetScene();
+  }
 
   public void ResetPhantom(){
     if(playerState != State.Phantom && playerState != State.PhantomMove) {
