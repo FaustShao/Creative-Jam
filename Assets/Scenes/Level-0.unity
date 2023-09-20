@@ -600,7 +600,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
       propertyPath: icons.Array.data[1].icon.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7319261143758873776, guid: 645dc66fe184c634983451218551cdf1, type: 3}
       propertyPath: icons.Array.data[0].icon.Array.data[0]

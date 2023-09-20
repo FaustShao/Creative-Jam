@@ -145,7 +145,7 @@ public class GameController : MonoBehaviour
         if(CurrentActivePlayer == p) {
           Debug.Log("SameActivePlayer");
         }
-        if(p.playerState == PlayerController.State.PhantomMove){ 
+        if(p.playerState == PlayerController.State.PhantomMove ||p.playerState == PlayerController.State.Phantom){ 
 
           if((CurrentActivePlayer.transform.position - p.transform.position ).magnitude <= 0.1f){
             FailGameCollide();

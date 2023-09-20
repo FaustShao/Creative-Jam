@@ -36,7 +36,7 @@ public class DialogueTrigger : MonoBehaviour
 
     IEnumerator loadStartDelayed()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.01f);
         if(isOnActive){
             ForceTrigger();
             isOnActive = false;
