@@ -78,7 +78,6 @@ public class GameController : MonoBehaviour
       if(isPause){
         CheckFinishedReplay();
       }
-      CheckWinCondition();
     }
 
     void CheckRewindAcitivateWarining(){
@@ -87,25 +86,6 @@ public class GameController : MonoBehaviour
         LowLifeWarning.ForceTrigger();
       }
       
-    }
-
-    void CheckWinCondition()
-    {
-      // Get player's and core object's positions
-      Vector2 playerPosition = CurrentActivePlayer.transform.position;
-      Vector2 corePosition = Endpoint.transform.position;
-
-      // Define the grid size (assuming a grid size of 1 unit here)
-      float gridSize = 1f;
-
-      // Check if the player is beside the core object in any of the four grid directions
-      if (Vector2.Distance(playerPosition, corePosition + Vector2.up * gridSize) < 0.1f ||
-          Vector2.Distance(playerPosition, corePosition + Vector2.down * gridSize) < 0.1f ||
-          Vector2.Distance(playerPosition, corePosition + Vector2.left * gridSize) < 0.1f ||
-          Vector2.Distance(playerPosition, corePosition + Vector2.right * gridSize) < 0.1f)
-      {
-        WinGame();
-      }
     }
 
 
@@ -125,17 +105,26 @@ public class GameController : MonoBehaviour
       remainingActionCount--;
 
       if(remainingActionCount == 0){
+        CurrentActivePlayer.playerState = PlayerController.State.Dead;
         remainingRewindCount--;
         CheckRewindAcitivateWarining();
         //death animation then Convert to Phantom
-        remainingActionCount = maxActionCount;
-        ResetWalls();
-        SetPhantomAnimator();
-        CurrentActivePlayer.ConvertToPhantom();
-        ResetAllPhantom();
-        GetNextPlayer();
-        
+        CurrentActivePlayer.ConvertToDeath();
+        //while(CurrentActivePlayer.playerState != PlayerController.State.Dead)
+        //{
+          //ResetScene();
+        //}
       }
+    }
+
+    public void ResetScene()
+    {
+      remainingActionCount = maxActionCount;
+      ResetWalls();
+      SetPhantomAnimator();
+      CurrentActivePlayer.ConvertToPhantom();
+      ResetAllPhantom();
+      GetNextPlayer();
     }
 
     public void ResetWalls()
